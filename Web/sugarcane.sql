@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2021 at 11:50 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Nov 29, 2021 at 10:36 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -92,7 +91,7 @@ CREATE TABLE `detailtransaksi` (
 INSERT INTO `detailtransaksi` (`id_detailtransaksi`, `id_user`, `id_barang`, `qty`) VALUES
 (1, 4, 1, 4),
 (2, 3, 11, 5),
-(5, 1, 11, 2);
+(5, 1, 11, 3);
 
 -- --------------------------------------------------------
 
@@ -138,9 +137,8 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_detailtransaksi`, `tgltransaksi`, `total`) VALUES
-(1, 1, '2021-06-16', '25000'),
-(2, 2, '2021-11-28', '30000'),
-(3, 5, '2021-11-28', '30000');
+(2, 2, '2021-11-29', '30000'),
+(3, 5, '2021-11-29', '30000');
 
 -- --------------------------------------------------------
 
