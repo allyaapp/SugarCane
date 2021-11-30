@@ -34,12 +34,6 @@ $sesLvl = $_SESSION['role'];
     <!-- Waves Effect Css -->
     <link href="../plugins/node-waves/waves.css" rel="stylesheet" />
 
-    <!-- Animation Css -->
-    <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
-
-    <!-- Morris Chart Css-->
-    <link href="../plugins/morrisjs/morris.css" rel="stylesheet" />
-
     <!-- Custom Css -->
     <link href="../css/style.css" rel="stylesheet">
 
@@ -200,9 +194,20 @@ $sesLvl = $_SESSION['role'];
                                         </tr>
                                     </thead>
                                     <?php 
-                                        $query = "SELECT * FROM barang";
+                                        $batas = 10;
+                                        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+                                        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;    
+
+                                        $previous = $halaman - 1;
+                                        $next = $halaman + 1;
+                                        
+                                        $data = mysqli_query($koneksi, "SELECT * FROM barang");
+                                        $jumlah_data = mysqli_num_rows($data);
+                                        $total_halaman = ceil($jumlah_data / $batas);
+                                
+                                        $query = "SELECT * FROM barang limit $halaman_awal, $batas";
                                         $result = mysqli_query($koneksi, $query);
-                                        $no = 1;
+                                        $no = $halaman_awal+1;
 
                                         if ($sesLvl == 1){
                                             $dis = "";
@@ -219,7 +224,7 @@ $sesLvl = $_SESSION['role'];
                                     ?>
                                     <tbody>
                                         <tr>
-                                            <td><?php echo $no; ?></td>
+                                            <td><?php echo $no++; ?></td>
                                             <td><?php echo $varian; ?></td>
                                             <td><?php echo $ukuran; ?></td>
                                             <td><?php echo $detailukuran; ?></td>
@@ -234,11 +239,35 @@ $sesLvl = $_SESSION['role'];
                                             </td>
                                         </tr>
                                         <?php 
-                                            $no++;
-                                        }
+                                            }
                                         ?>
                                     </tbody>
                                 </table>
+                                <nav>
+                                <ul class="pagination table-bordered">
+                                    <li>
+                                        <a class="waves-effect" <?php if($halaman > 1){ echo "href='baranghome.php?halaman=$previous'";} ?> >
+                                            PREVIOUS
+                                            <!-- <i class="material-icons">chevron_left</i> -->
+                                        </a>
+                                    </li>
+
+                                    <?php 
+                                        for($x=1; $x<=$total_halaman; $x++){
+                                    ?>
+                                        <li><a class="waves-effect" href="baranghome.php?halaman=<?php echo $x ?>"><?php echo $x; ?><!-- &nbsp;&nbsp;| --></a></li>
+                                    <?php
+                                        }
+                                    ?>  
+
+                                    <li>
+                                        <a class="waves-effect" <?php if($halaman < $total_halaman){ echo "href='baranghome.php?halaman=$next'";} ?>>
+                                            NEXT
+                                            <!-- <i class="material-icons">chevron_right</i> -->
+                                        </a>
+                                    </li>
+                                </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
@@ -264,7 +293,6 @@ $sesLvl = $_SESSION['role'];
     <script src="../plugins/node-waves/waves.js"></script>
 
     <!-- Jquery DataTable Plugin Js -->
-    <script src="../plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
