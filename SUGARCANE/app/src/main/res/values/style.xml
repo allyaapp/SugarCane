@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="buttonstyle1" parent="Theme.AppCompat.DayNight">
+        <item name="colorControlHighlight">@color/SignIn</item>
+        <item name="colorButtonNormal">@color/SignIn</item>
+    </style>
+</resources>

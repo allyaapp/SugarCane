@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/abu_bar.xml" value="0.14290540540540542" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/abu_btn_bg.xml" value="0.14290540540540542" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/bghijau.xml" value="1.5107142857142857" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/bgputih.xml" value="0.14290540540540542" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/card_bg.xml" value="0.14290540540540542" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/hijau_bar.xml" value="0.13378378378378378" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/hijau_btn.xml" value="0.14290540540540542" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/putih_btn.xml" value="0.13378378378378378" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/activity_cart.xml" value="0.22" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/activity_history.xml" value="0.1814814814814815" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/activity_login.xml" value="0.1814814814814815" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/activity_profile.xml" value="0.1814814814814815" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/activity_show_detail.xml" value="0.2" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/activity_welcome.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/home.xml" value="0.22" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/list_pesanan.xml" value="0.17657657657657658" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/register.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/viewholder_cart.xml" value="0.25" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/viewholder_category.xml" value="0.22" />
+        <entry key="..\:/Users/HANI/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/viewholder_recommended.xml" value="0.22" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2203125" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2203125" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/logo_asli.xml" value="0.2203125" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/logo_asli_1.xml" value="0.2203125" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/rectangle_1.xml" value="0.2203125" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/rectangle_1_1.xml" value="0.2203125" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/rectangle_3.xml" value="0.2169230769230769" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/rectangle_4.xml" value="0.2169230769230769" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/rectangle_6.xml" value="0.2203125" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/drawable/sign_in.xml" value="0.2203125" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/activity_welcome.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/dwiki/AndroidStudioProjects/SUGARCANE/app/src/main/res/layout/register.xml" value="0.18" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/activity_login.xml" value="0.18" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/activity_profile.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/home.xml" value="0.2" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/register.xml" value="0.21" />
+        <entry key="..\:/Users/dwiki/Downloads/SugarCane-main/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/activity_profile.xml" value="0.25" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/drawable/hijau_bar.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/drawable/hijau_btn.xml" value="0.19282051282051282" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/drawable/logo_asli_1.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/drawable/putih_btn.xml" value="0.12222222222222222" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/drawable/rectangle_1.xml" value="0.12222222222222222" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/drawable/rectangle_1_1.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/drawable/rectangle_6.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/font/roboto_light.xml" value="0.12222222222222222" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/activity_cart.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/activity_history.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/activity_main.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/activity_profile.xml" value="0.1" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/activity_welcome.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/home.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/list_pesanan.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/register.xml" value="0.22" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/viewholder_cart.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/viewholder_category.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/layout/viewholder_recommended.xml" value="0.22" />
+        <entry key="..\:/Users/ketut budi ariyana/SugarCane-main/SugarCane-main/SUGARCANE/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.12222222222222222" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
