@@ -20,20 +20,22 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    EditText editTextUsername, editTextPassword;
+    EditText etUsername, etPassword;
     Button btnSignIn;
     String Username, Password;
     TextView tvRegister;
     ApiInterface apiInterface;
     SessionManager sessionManager;
 
+    String message;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editTextUsername = findViewById(R.id.usernamelogin);
-        editTextPassword = findViewById(R.id.passwordlogin);
+        etUsername = findViewById(R.id.usernamelogin);
+        etPassword = findViewById(R.id.passwordlogin);
 
         btnSignIn = findViewById(R.id.btnLogin);
         btnSignIn.setOnClickListener(this);
@@ -46,8 +48,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogin:
-                Username = editTextUsername.getText().toString();
-                Password = editTextPassword.getText().toString();
+                Username = etUsername.getText().toString();
+                Password = etPassword.getText().toString();
                 login(Username, Password);
                 break;
             case R.id.tvRegister:
@@ -57,10 +59,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void login(String email, String password) {
-
+    private void login(String username, String password) {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Login> loginCall = apiInterface.loginResponse(email, password);
+        Call<Login> loginCall = apiInterface.loginResponse(username, password);
         loginCall.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
@@ -76,8 +77,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
+                    message = "Login was succesfull";
                 } else {
                     Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    message = "Invalid Login";
                 }
 
             }
@@ -85,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<Login> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                message = "Invalid Login";
             }
         });
 

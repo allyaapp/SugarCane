@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView Username;
+public class MainActivity extends AppCompatActivity{
+    TextView etUsername;
     SessionManager sessionManager;
     String username;
 
@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             moveToLogin();
         }
 
-
+        etUsername = findViewById(R.id.MainUsername);
         username = sessionManager.getUserDetail().get(SessionManager.USERNAME);
 
-        Username.setText(username);
+        etUsername.setText(username);
 
     }
 
@@ -37,9 +37,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         finish();
     }
-
-    @Override
-    public void onClick(View v) {
-
     }
-}
+
