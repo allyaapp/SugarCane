@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2021 at 04:35 PM
+-- Generation Time: Dec 01, 2021 at 04:38 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sugarcanee`
+-- Database: `sugarcane`
 --
 
 -- --------------------------------------------------------
@@ -35,19 +35,20 @@ CREATE TABLE `admindetail` (
   `alamat` text NOT NULL,
   `username` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL,
-  `role` int(1) NOT NULL
+  `role` int(1) NOT NULL,
+  `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admindetail`
 --
 
-INSERT INTO `admindetail` (`id_admin`, `fullname`, `no_hp`, `alamat`, `username`, `password`, `role`) VALUES
-(1, 'Vasyilla Kautsar', '089665566774', 'Jember', 'syilla', 'syilla', 1),
-(2, 'Nanda Arsya', '081251728192', 'Jl.Manggar Gg. Tugu', 'dzikri', 'dzikri', 1),
-(3, 'Sofia Ufaira', '088898765676', 'dfahgfkjad', 'sofia', 'sofia', 2),
-(4, 'Dzikri Abyudzaky', '088821345162', 'jfkjafkfkaj', 'dzikri', 'dzikri', 2),
-(6, 'Naila Khansa', '083718371928', 'gldghsdlghsdgl', 'naila', 'naila', 2);
+INSERT INTO `admindetail` (`id_admin`, `fullname`, `no_hp`, `alamat`, `username`, `password`, `role`, `foto`) VALUES
+(1, 'Vasyilla Kautsar', '089665566774', 'Jember', 'syilla', 'syilla', 1, ''),
+(2, 'Nanda Arsya', '081251728192', 'Jl.Manggar Gg. Tugu', 'dzikri', 'dzikri', 1, ''),
+(3, 'Sofia Ufaira', '088898765676', 'dfahgfkjad', 'sofia', 'sofia', 2, ''),
+(4, 'Dzikri Abyudzaky', '088821345162', 'jfkjafkfkaj', 'dzikri', 'dzikri', 2, ''),
+(6, 'Naila Khansa', '083718371928', 'gldghsdlghsdgl', 'naila', 'naila', 2, '');
 
 -- --------------------------------------------------------
 
@@ -60,25 +61,27 @@ CREATE TABLE `barang` (
   `varian` enum('Chocolate','Strawberry','VanillaOreo','') NOT NULL,
   `ukuran` enum('Mini','Jumbo') NOT NULL,
   `id_detailukuran` varchar(2) NOT NULL,
-  `stok` int(3) NOT NULL
+  `stok` int(3) NOT NULL,
+  `gambar` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `varian`, `ukuran`, `id_detailukuran`, `stok`) VALUES
-(1, 'Chocolate', 'Mini', 'M1', 100),
-(2, 'Chocolate', 'Mini', 'M2', 75),
-(12, 'Chocolate', 'Mini', 'M3', 21),
-(13, 'Chocolate', 'Jumbo', 'J1', 42),
-(14, 'Chocolate', 'Jumbo', 'J2', 82),
-(16, 'Chocolate', 'Jumbo', 'J3', 82),
-(17, 'Chocolate', 'Jumbo', 'J4', 26),
-(18, 'Chocolate', 'Jumbo', 'J5', 21),
-(19, 'Strawberry', 'Mini', 'M1', 21),
-(20, 'Strawberry', 'Mini', 'M2', 42),
-(21, 'Strawberry', 'Mini', 'M3', 82);
+INSERT INTO `barang` (`id_barang`, `varian`, `ukuran`, `id_detailukuran`, `stok`, `gambar`) VALUES
+(1, 'Chocolate', 'Mini', 'M1', 100, ''),
+(2, 'Chocolate', 'Mini', 'M2', 75, ''),
+(12, 'Chocolate', 'Mini', 'M3', 21, ''),
+(13, 'Chocolate', 'Jumbo', 'J1', 42, ''),
+(14, 'Chocolate', 'Jumbo', 'J2', 82, ''),
+(16, 'Chocolate', 'Jumbo', 'J3', 82, ''),
+(17, 'Chocolate', 'Jumbo', 'J4', 26, ''),
+(18, 'Chocolate', 'Jumbo', 'J5', 21, ''),
+(19, 'Strawberry', 'Mini', 'M1', 21, ''),
+(20, 'Strawberry', 'Mini', 'M2', 42, ''),
+(21, 'Strawberry', 'Mini', 'M3', 82, ''),
+(22, 'Strawberry', 'Jumbo', 'J1', 88, '');
 
 -- --------------------------------------------------------
 
@@ -163,19 +166,20 @@ CREATE TABLE `user` (
   `alamat` text NOT NULL,
   `no_hp` varchar(13) NOT NULL,
   `username` varchar(10) NOT NULL,
-  `password` varchar(10) NOT NULL
+  `password` varchar(10) NOT NULL,
+  `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `fullname`, `alamat`, `no_hp`, `username`, `password`) VALUES
-(1, 'Nur Allya', 'Bali', '081234567898', 'allya', 'allya'),
-(3, 'Hani', 'Bali', '081234567812', 'hani', 'hani'),
-(4, 'Ajeng', 'Bondowoso', '081273819287', 'ajeng', 'ajeng'),
-(6, 'Dwiki', 'Situbondo', '082638192739', 'dwiki', 'dwiki'),
-(7, 'Bornin', 'Jember', '0982716273829', 'bornin', 'bornin');
+INSERT INTO `user` (`id_user`, `fullname`, `alamat`, `no_hp`, `username`, `password`, `foto`) VALUES
+(1, 'Nur Allya', 'Bali', '081234567898', 'allya', 'allya', ''),
+(3, 'Hani', 'Bali', '081234567812', 'hani', 'hani', ''),
+(4, 'Ajeng', 'Bondowoso', '081273819287', 'ajeng', 'ajeng', ''),
+(6, 'Dwiki', 'Situbondo', '082638192739', 'dwiki', 'dwiki', ''),
+(7, 'Bornin', 'Jember', '0982716273829', 'bornin', 'bornin', '');
 
 --
 -- Indexes for dumped tables
@@ -236,7 +240,7 @@ ALTER TABLE `admindetail`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `pesanan`

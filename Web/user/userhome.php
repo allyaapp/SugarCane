@@ -152,13 +152,13 @@ $sesLvl = $_SESSION['role'];
                 </ul>
             </div>
             <!-- #Menu -->
+
             <!-- Footer -->
             <div class="legal">
-                <a href="../logout.php">
-                    <button type="button" class="btn bg-red btn-block waves-effect">LOGOUT</button>
-                </a>
+                <button type="button" data-color="red" class="btn bg-red btn-block waves-effect m-r-20" data-toggle="modal" data-target="#modallogout">LOGOUT</button>
             </div>
             <!-- #Footer -->
+
         </aside>
         <!-- #END# Left Sidebar -->
         </section>
@@ -275,7 +275,32 @@ $sesLvl = $_SESSION['role'];
             </section>
         <!-- #Content -->
 
-    <!-- Jquery Core Js -->
+        <!-- Modal -->
+        <div class="modal fade" id="modallogout" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <!-- konten modal-->
+                    <div class="modal-content">
+                        <!-- heading modal -->
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
+                                >
+                        </div>
+                        <!-- body modal -->
+                        <div class="modal-body">
+                            <h5>Are you sure you want to logout?</h5>
+                        </div>
+                        <!-- footer modal -->
+                        <div class="modal-footer">
+                            <a href="../logout.php">
+                                <button type="button" class="btn btn-link waves-effect">Yes</button>
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancel</button>
+                            </a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- #Modal -->
+
     <!-- Jquery Core Js -->
     <script src="../plugins/jquery/jquery.min.js"></script>
 
@@ -304,6 +329,7 @@ $sesLvl = $_SESSION['role'];
 
     <!-- Custom Js -->
     <script src="../js/admin.js"></script>
+    <script src="../js/pages/ui/modals.js"></script>
     <script src="../js/pages/tables/jquery-datatable.js"></script>
 
     <!-- Demo Js -->

@@ -27,8 +27,8 @@ if(isset($_POST['submit']) ){
                 $_SESSION['role'] = $role;
                 header('Location: index.php');
             } else{
-                header('Location: login.php');
-                echo "Password atau Username yang anda masukkan salah!";
+                // header('Location: login.php');
+                echo "<script> alert('Password atau Username yang anda masukkan salah!')</script>";
             }
         } else{
             header('Location: login.php');
