@@ -153,13 +153,13 @@ $sesLvl = $_SESSION['role'];
                 </ul>
             </div>
             <!-- #Menu -->
+
             <!-- Footer -->
             <div class="legal">
-                <a href="logout.php">
-                    <button type="button" class="btn bg-red btn-block waves-effect">LOGOUT</button>
-                </a>
+                <button type="button" data-color="red" class="btn bg-red btn-block waves-effect m-r-20" data-toggle="modal" data-target="#modallogout">LOGOUT</button>
             </div>
             <!-- #Footer -->
+
         </aside>
         <!-- #END# Left Sidebar -->
         </section>
@@ -188,7 +188,7 @@ $sesLvl = $_SESSION['role'];
                         ?>
                         <div class="content">
                             <div class="text">ADMIN</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $cont; ?>" data-speed="15" data-fresh-interval="20"></div>
+                            <div class="number"><?php echo $cont; ?></div>
                         </div>
                     </div>
                 </div>
@@ -208,7 +208,7 @@ $sesLvl = $_SESSION['role'];
                         ?>
                         <div class="content">
                             <div class="text">PENGGUNA</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $cont; ?>" data-speed="15" data-fresh-interval="20"></div>
+                            <div class="number"><?php echo $cont; ?></div>
                         </div>
                     </div>
                 </div>
@@ -228,7 +228,7 @@ $sesLvl = $_SESSION['role'];
                         ?>
                         <div class="content">
                             <div class="text">JUMLAH BARANG</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $cont; ?>" data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="number"><?php echo $cont; ?></div>
                         </div>
                     </div>
                 </div>
@@ -248,7 +248,7 @@ $sesLvl = $_SESSION['role'];
                         ?>
                         <div class="content">
                             <div class="text">TRANSAKSI</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $cont; ?>" data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="number"><?php echo $cont; ?></div>
                         </div>
                     </div>
                 </div>
@@ -305,6 +305,32 @@ $sesLvl = $_SESSION['role'];
         </div>
     </section>
 
+    <!-- Modal -->
+    <div class="modal fade" id="modallogout" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <!-- konten modal-->
+                <div class="modal-content">
+                    <!-- heading modal -->
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
+                            >
+                    </div>
+                    <!-- body modal -->
+                    <div class="modal-body">
+                        <h5>Are you sure you want to logout?</h5>
+                    </div>
+                    <!-- footer modal -->
+                    <div class="modal-footer">
+                        <a href="logout.php">
+                            <button type="button" class="btn btn-link waves-effect">Yes</button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancel</button>
+                        </a>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!-- #Modal -->
+
     <!-- Jquery Core Js -->
     <script src="plugins/jquery/jquery.min.js"></script>
 
@@ -323,6 +349,7 @@ $sesLvl = $_SESSION['role'];
     <!-- Custom Js -->
     <script src="js/admin.js"></script>
     <script src="js/pages/index.js"></script>
+    <script src="js/pages/ui/modals.js"></script>
 
     <!-- Demo Js -->
     <script src="js/demo.js"></script>
