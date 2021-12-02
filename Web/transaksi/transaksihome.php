@@ -79,7 +79,7 @@ $sesLvl = $_SESSION['role'];
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                         </ul>
                     </li>
                     <!-- #User Info -->
@@ -145,7 +145,7 @@ $sesLvl = $_SESSION['role'];
                                 </li>
                                 <li>
                                     <a href="detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
@@ -186,9 +186,9 @@ $sesLvl = $_SESSION['role'];
                                         <tr>
                                             <th>No.</th>
                                             <th>ID Transaksi</th>
-                                            <th>ID Detail Transaksi</th>
+                                            <th>ID User</th>
                                             <th>Tanggal Transaksi</th>
-                                            <th>Total</th>
+                                            <th>Total Harga</th>
                                             <th>Menu</th>
                                         </tr>
                                     </thead>
@@ -205,17 +205,17 @@ $sesLvl = $_SESSION['role'];
 
                                         while ($row = mysqli_fetch_array($result)){
                                             $id_transaksi = $row['id_transaksi'];
-                                            $id_detailtransaksi = $row['id_detailtransaksi'];
+                                            $id_user = $row['id_user'];
                                             $tgltransaksi = $row['tgltransaksi'];
-                                            $total = $row['total'];
+                                            $totalharga = $row['totalharga'];
                                     ?>
                                     <tbody>
                                         <tr>
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $id_transaksi; ?></td>
-                                            <td><?php echo $id_detailtransaksi; ?></td>
+                                            <td><?php echo $id_user; ?></td>
                                             <td><?php echo $tgltransaksi; ?></td>
-                                            <td><?php echo $total; ?></td>
+                                            <td><?php echo $totalharga; ?></td>
                                             <td>
                                                 <a href="transaksiedit.php?id=<?php echo $row['id_transaksi']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>

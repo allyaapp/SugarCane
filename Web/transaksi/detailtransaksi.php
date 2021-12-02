@@ -20,7 +20,7 @@ $sesLvl = $_SESSION['role'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Transaction Details | SUGAR CANE</title>
+    <title>Order | SUGAR CANE</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -84,7 +84,7 @@ $sesLvl = $_SESSION['role'];
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li> 
+                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li> 
                         </ul>
                     </li>
                     <!-- #User Info -->
@@ -150,7 +150,7 @@ $sesLvl = $_SESSION['role'];
                                 </li>
                                 <li class="active">
                                     <a href="detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
@@ -175,7 +175,7 @@ $sesLvl = $_SESSION['role'];
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DETAIL TRANSAKSI
+                                ORDER
                             </h2>
                             <a href="dtransaksicreate.php"> 
                                 <button type="button" class="btn bg-light-green waves-effect" style="border-radius: 3px;">
@@ -190,15 +190,16 @@ $sesLvl = $_SESSION['role'];
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>ID Detail Transaksi</th>
-                                            <th>ID User</th>
+                                            <th>ID Pesanan</th>
+                                            <th>ID Transaksi</th>
                                             <th>ID Barang</th>
                                             <th>Quantity</th>
+                                            <th>Sub Harga</th>
                                             <th>Menu</th>
                                         </tr>
                                     </thead>
                                     <?php 
-                                        $query = "SELECT * FROM detailtransaksi";
+                                        $query = "SELECT * FROM pesanan";
                                         $result = mysqli_query($koneksi, $query);
                                         $no = 1;
 
@@ -209,23 +210,25 @@ $sesLvl = $_SESSION['role'];
                                         }
 
                                         while ($row = mysqli_fetch_array($result)){
-                                            $id_detailtransaksi = $row['id_detailtransaksi'];
-                                            $id_user = $row['id_user'];
+                                            $id_pesanan = $row['id_pesanan'];
+                                            $id_transaksi = $row['id_transaksi'];
                                             $id_barang= $row['id_barang'];
                                             $qty= $row['qty'];
+                                            $subharga= $row['subharga'];
                                     ?>
                                     <tbody>
                                         <tr>
                                             <td><?php echo $no; ?></td>
-                                            <td><?php echo $id_detailtransaksi; ?></td>
-                                            <td><?php echo $id_user; ?></td>
+                                            <td><?php echo $id_pesanan; ?></td>
+                                            <td><?php echo $id_transaksi; ?></td>
                                             <td><?php echo $id_barang; ?></td>
                                             <td><?php echo $qty; ?></td>
+                                            <td><?php echo $subharga; ?></td>
                                             <td>
-                                                <a href="dtransaksiedit.php?id=<?php echo $row['id_detailtransaksi']; ?>">
+                                                <a href="dtransaksiedit.php?id=<?php echo $row['id_pesanan']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
                                                 </a>
-                                                <a href="dtransaksidelete.php?id=<?php echo $row['id_detailtransaksi']; ?>">
+                                                <a href="dtransaksidelete.php?id=<?php echo $row['id_pesanan']; ?>">
                                                     <input type="button" class="btn btn-danger" value="Delete" name="delete" <?php echo $dis; ?>>
                                                 </a>
                                             </td>

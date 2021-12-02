@@ -14,11 +14,11 @@ $sesLvl = $_SESSION['role'];
 
     if(isset($_POST['update']) ){
         $id_transaksi = $_POST['id_transaksi'];
-        $id_detailtransaksi = $_POST['id_detailtransaksi'];
+        $id_user = $_POST['id_user'];
         $tgltransaksi = $_POST['tgltransaksi'];
-        $total = $_POST['total'];
+        $totalharga = $_POST['totalharga'];
 
-        $query = "UPDATE transaksi SET id_detailtransaksi='$id_detailtransaksi', tgltransaksi='$tgltransaksi', total='$total' WHERE id_transaksi='$id_transaksi'";
+        $query = "UPDATE transaksi SET id_user='$id_user', tgltransaksi='$tgltransaksi', totalharga='$totalharga' WHERE id_transaksi='$id_transaksi'";
         $result = mysqli_query($koneksi, $query);
         header('Location: transaksihome.php');
     }
@@ -30,9 +30,9 @@ $sesLvl = $_SESSION['role'];
             
     while ($row = mysqli_fetch_array($result)){
         $id_transaksi = $row['id_transaksi'];
-        $id_detailtransaksi = $row['id_detailtransaksi'];
+        $id_user = $row['id_user'];
         $tgltransaksi = $row['tgltransaksi'];
-        $total = $row['total'];    
+        $totalharga = $row['totalharga'];    
 
 ?>
 
@@ -106,7 +106,7 @@ $sesLvl = $_SESSION['role'];
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="../logout.php"><i class="material-icons">input</i>Sign Out</a></li>
                             <div class="dropdown-divider"></div>
@@ -175,7 +175,7 @@ $sesLvl = $_SESSION['role'];
                                 </li>
                                 <li>
                                     <a href="detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
@@ -214,8 +214,8 @@ $sesLvl = $_SESSION['role'];
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="id_detailtransaksi" value="<?php echo $id_detailtransaksi;?>" required>
-                                        <label class="form-label">ID DETAIL TRANSAKSI</label>
+                                        <input type="text" class="form-control" name="id_user" value="<?php echo $id_user;?>" required>
+                                        <label class="form-label">ID USER</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
@@ -226,8 +226,8 @@ $sesLvl = $_SESSION['role'];
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="total" value="<?php echo $total;?>" required>
-                                        <label class="form-label">TOTAL</label>
+                                        <input type="text" class="form-control" name="totalharga" value="<?php echo $totalharga;?>" required>
+                                        <label class="form-label">TOTAL HARGA</label>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="update">UPDATE</button>
