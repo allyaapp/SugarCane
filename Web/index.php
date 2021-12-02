@@ -144,7 +144,7 @@ $sesLvl = $_SESSION['role'];
                                 </li>
                                 <li>
                                     <a href="transaksi/detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
