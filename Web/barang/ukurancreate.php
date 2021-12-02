@@ -94,7 +94,7 @@ if(isset ($_POST['create']) ){
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="../logout.php"><i class="material-icons">input</i>Sign Out</a></li>
                             <div class="dropdown-divider"></div>
@@ -163,7 +163,7 @@ if(isset ($_POST['create']) ){
                                 </li>
                                 <li>
                                     <a href="..transaksi/detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
