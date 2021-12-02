@@ -13,12 +13,13 @@ $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 
 if(isset ($_POST['create']) ){
-    $id = $_POST['id_detailtransaksi'];
-    $id_u = $_POST['id_user'];
-    $id_b = $_POST['id_barang'];
+    $id_pesanan = $_POST['id_pesanan'];
+    $id_transaksi = $_POST['id_transaksi'];
+    $id_barang = $_POST['id_barang'];
     $qty = $_POST['qty'];
+    $subharga = $_POST['subharga'];
 
-    $query = "INSERT INTO detailtransaksi VALUES ('', '$id_u', '$id_b', '$qty')";
+    $query = "INSERT INTO pesanan VALUES ('', '$id_transaksi', '$id_barang', '$qty', '$subharga')";
     $result = mysqli_query($koneksi, $query);
     header('Location: detailtransaksi.php');
 }
@@ -32,7 +33,7 @@ if(isset ($_POST['create']) ){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Create Transaction Detail Data | SUGAR CANE</title>
+    <title>Create Order | SUGAR CANE</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -95,7 +96,7 @@ if(isset ($_POST['create']) ){
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                             <div class="dropdown-divider"></div>
                         </ul>
                     </li>
@@ -162,7 +163,7 @@ if(isset ($_POST['create']) ){
                                 </li>
                                 <li class="active">
                                     <a href="detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
@@ -201,8 +202,8 @@ if(isset ($_POST['create']) ){
                                 </div> -->
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" class="form-control" name="id_user" required>
-                                        <label class="form-label">ID User</label>
+                                        <input type="number" class="form-control" name="id_transaksi" required>
+                                        <label class="form-label">ID Transaksi</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
@@ -215,6 +216,12 @@ if(isset ($_POST['create']) ){
                                     <div class="form-line">
                                         <input type="number" class="form-control" name="qty" required>
                                         <label class="form-label">Quantity</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="subharga" required>
+                                        <label class="form-label">Sub Harga</label>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="create">CREATE</button>
