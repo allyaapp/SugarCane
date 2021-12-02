@@ -13,26 +13,28 @@ $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 
     if(isset($_POST['update']) ){
-        $id_detailtransaksi = $_POST['id_detailtransaksi'];
-        $id_user = $_POST['id_user'];
+        $id_pesanan = $_POST['id_pesanan'];
+        $id_transaksi = $_POST['id_transaksi'];
         $id_barang = $_POST['id_barang'];
         $qty = $_POST['qty'];
+        $subharga = $_POST['subharga'];
 
-        $query = "UPDATE detailtransaksi SET id_detailtransaksi='$id_detailtransaksi', id_user='$id_user', id_barang='$id_barang', qty='$qty' WHERE id_detailtransaksi='$id_detailtransaksi'";
+        $query = "UPDATE pesanan SET id_pesanan='$id_pesanan', id_transaksi='$id_transaksi', id_barang='$id_barang', qty='$qty', subharga='$subharga' WHERE id_pesanan='$id_pesanan'";
         $result = mysqli_query($koneksi, $query);
         header('Location: detailtransaksi.php');
     }
 
     $id = $_GET['id'];
-    $query = "SELECT * FROM detailtransaksi WHERE id_detailtransaksi='$id'";
+    $query = "SELECT * FROM pesanan WHERE id_pesanan='$id'";
     $result = mysqli_query($koneksi, $query) or die (mysql_error());
     $no = 1;
             
     while ($row = mysqli_fetch_array($result)){
-        $id_detailtransaksi = $row['id_detailtransaksi'];
-        $id_user = $row['id_user'];
+        $id_pesanan = $row['id_pesanan'];
+        $id_transaksi = $row['id_transaksi'];
         $id_barang = $row['id_barang'];
-        $qty = $_row['qty'];    
+        $qty = $_row['qty'];   
+        $subharga = $_row['subharga'];  
 
 ?>
 
@@ -43,7 +45,7 @@ $sesLvl = $_SESSION['role'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Edit Transaksi | SUGAR CANE</title>
+    <title>Edit Pesanan | SUGAR CANE</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -106,7 +108,7 @@ $sesLvl = $_SESSION['role'];
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="../logout.php"><i class="material-icons">input</i>Sign Out</a></li>
                             <div class="dropdown-divider"></div>
@@ -175,7 +177,7 @@ $sesLvl = $_SESSION['role'];
                                 </li>
                                 <li class="active">
                                     <a href="../transaksi/detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
@@ -208,13 +210,13 @@ $sesLvl = $_SESSION['role'];
                             <form id="form_validation" method="POST" action="dtransaksiedit.php">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="id_detailtransaksi" value="<?php echo $id_detailtransaksi;?>" required>
-                                        <label class="form-label">ID Detail Transaksi</label>
+                                        <input type="text" class="form-control" name="id_pesanan" value="<?php echo $id_pesanan;?>" required>
+                                        <label class="form-label">ID Pesanan</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="id_user" value="<?php echo $id_user;?>" required>
+                                        <input type="text" class="form-control" name="id_transaksi" value="<?php echo $id_transaksi;?>" required>
                                         <label class="form-label">ID User</label>
                                     </div>
                                 </div>
@@ -228,6 +230,12 @@ $sesLvl = $_SESSION['role'];
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="qty" value="<?php echo $qty;?>" required>
                                         <label class="form-label">Quantity</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="subharga" value="<?php echo $qty;?>" required>
+                                        <label class="form-label">Sub Harga</label>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="update">UPDATE</button>
