@@ -13,12 +13,12 @@ $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 
 if(isset ($_POST['create']) ){
-    $id = $_POST['id_transaksi'];
-    $id_dt = $_POST['id_detailtransaksi'];
-    $tgl = $_POST['tgltransaksi'];
-    $total = $_POST['total'];
+    $id_transaksi = $_POST['id_transaksi'];
+    $id_user = $_POST['id_user'];
+    $tgltransaksi = $_POST['tgltransaksi'];
+    $totalharga = $_POST['totalharga'];
 
-    $query = "INSERT INTO transaksi VALUES ('', '$id_dt', '$tgl', '$total')";
+    $query = "INSERT INTO transaksi VALUES ('', '$id_user', '$tgltransaksi', '$totalharga')";
     $result = mysqli_query($koneksi, $query);
     header('Location: transaksihome.php');
 }
@@ -95,7 +95,7 @@ if(isset ($_POST['create']) ){
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                             <div class="dropdown-divider"></div>
                         </ul>
                     </li>
@@ -162,7 +162,7 @@ if(isset ($_POST['create']) ){
                                 </li>
                                 <li>
                                     <a href="detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
@@ -201,20 +201,20 @@ if(isset ($_POST['create']) ){
                                 </div> -->
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" class="form-control" name="id_detailtransaksi" required>
-                                        <label class="form-label">ID Detail Transaksi</label>
+                                        <input type="number" class="form-control" name="id_user" required>
+                                        <label class="form-label">ID USER</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="date" class="form-control" name="tgltransaksi" required>
-                                        <label class="form-label">Tanggal Transaksi</label>
+                                        <label class="form-label">TANGGAL TRANSAKSI</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" class="form-control" name="total" required>
-                                        <label class="form-label">Total</label>
+                                        <input type="number" class="form-control" name="totalharga" required>
+                                        <label class="form-label">TOTAL HARGA</label>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="create">CREATE</button>
