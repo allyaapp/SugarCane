@@ -96,7 +96,7 @@ $sesImg = $_SESSION['foto'];
                             <img class="img-profile rounded-circle" src="<?php echo "../$sesImg"; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
                         <!-- Dropdown - User Information -->
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
                             <li><a href="../editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                         </ul>
