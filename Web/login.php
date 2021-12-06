@@ -19,23 +19,23 @@ if(isset($_POST['submit']) ){
             $passVal = $row['password'];
             $uname = $row['fullname'];
             $role = $row['role'];
+            $foto = $row['foto'];
         }
         if ($num != 0){
             if($userVal==$user && $passVal==$pass) {
                 $_SESSION['id'] = $id;
                 $_SESSION['username'] = $userVal;
                 $_SESSION['role'] = $role;
+                $_SESSION['foto'] = $foto;
                 header('Location: index.php');
             } else{
-                // header('Location: login.php');
                 echo "<script> alert('Password atau Username yang anda masukkan salah!')</script>";
             }
         } else{
-            header('Location: login.php');
-            echo "User tidak ditemukan!";
+            echo "<script> alert('User tidak ditemukan!')</script>";
         }
     } else{
-        echo "Data tidak boleh kosong!";
+        echo "<script> alert('Data tidak boleh kosong!')</script>";
     }
 }
 ?>
