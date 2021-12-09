@@ -11,7 +11,6 @@ if(!isset($_SESSION['id'])){
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
-$sesImg = $_SESSION['foto'];
 
 ?>
 <!DOCTYPE html>
@@ -72,14 +71,14 @@ $sesImg = $_SESSION['foto'];
                    <!-- User Info   -->
                    <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo $sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px;" >
+                            <img class="img-profile rounded-circle" src="images/user.png" width="70%" style="border-radius: 50px;">
                         </a>
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                                <li>
-                                    <a href="editprofile.php"><i class="material-icons">person</i>Profile</a>
-                                </li>
+                            <li>
+                                <a href="editprofile.php"><i class="material-icons">person</i>Profile</a>
+                            </li>
                             <div class="dropdown-divider"></div>
                         </ul>
                     </li>
@@ -99,35 +98,35 @@ $sesImg = $_SESSION['foto'];
                         <li class="active">
                             <a href="index.php">
                                 <i class="material-icons">home</i>
-                                <span>DASHBOARD</span>
+                                <span>Dashboard</span>
                             </a>
                         </li>
                         <li>
                             <a href="admin/adminhome.php">
                                 <i class="material-icons">account_box</i>
-                                <span>ADMIN</span>
+                                <span>Admins</span>
                             </a>
                         </li>
                         <li>
                             <a href="user/userhome.php">
                                 <i class="material-icons">person</i>
-                                <span>USER</span>
+                                <span>Users</span>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">library_books</i>
-                                <span>PRODUCT</span>
+                                <span>Data Barang</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
                                     <a href="barang/baranghome.php">
-                                        <span>PRODUCT</span>
+                                        <span>Barang</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="barang/detailukuran.php">
-                                        <span>SIZE DETAILS</span>
+                                        <span>Detail Ukuran</span>
                                     </a>
                                 </li>
                             </ul>
@@ -135,17 +134,17 @@ $sesImg = $_SESSION['foto'];
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">assessment</i>
-                                <span>TRANSACTION</span>
+                                <span>Transaksi</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
                                     <a href="transaksi/transaksihome.php">
-                                        <span>TRANSACTION</span>
+                                        <span>Transaksi</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="transaksi/detailtransaksi.php">
-                                        <span>TRANSACTION DETAILS</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
@@ -208,7 +207,7 @@ $sesImg = $_SESSION['foto'];
 
                         ?>
                         <div class="content">
-                            <div class="text">USER</div>
+                            <div class="text">PENGGUNA</div>
                             <div class="number"><?php echo $cont; ?></div>
                         </div>
                     </div>
@@ -228,7 +227,7 @@ $sesImg = $_SESSION['foto'];
 
                         ?>
                         <div class="content">
-                            <div class="text">PRODUCT</div>
+                            <div class="text">JUMLAH BARANG</div>
                             <div class="number"><?php echo $cont; ?></div>
                         </div>
                     </div>
@@ -248,7 +247,7 @@ $sesImg = $_SESSION['foto'];
 
                         ?>
                         <div class="content">
-                            <div class="text">TRANSACTION</div>
+                            <div class="text">TRANSAKSI</div>
                             <div class="number"><?php echo $cont; ?></div>
                         </div>
                     </div>
@@ -256,177 +255,80 @@ $sesImg = $_SESSION['foto'];
             </div>
             <!-- #END# Widgets -->
             
-            <!-- Info -->
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row clearfix">
+                <!-- Task Info -->
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                SUGARCANE
-                            </h2>
-                        </div>
-                        <div class="body">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                                <li role="presentation" class="active"><a href="#about" data-toggle="tab">ABOUT</a></li>
-                                <li role="presentation"><a href="#chocolate" data-toggle="tab">CHOCOLATE</a></li>
-                                <li role="presentation"><a href="#strawberry" data-toggle="tab">STRAWBERRY</a></li>
-                                <li role="presentation"><a href="#vanillaoreo" data-toggle="tab">VANILLA OREO</a></li>
+                            <h2>SUGARCANE</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
                             </ul>
-
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade in active" id="about">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                        Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                        pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                        sadipscing mel.
-                                    </p>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="chocolate">
-                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                        <!-- Indicators -->
-                                        <ol class="carousel-indicators">
-                                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                                            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                                        </ol>
-
-                                        <!-- Wrapper for slides -->
-                                        <div class="carousel-inner" role="listbox">
-                                            <div class="item active">
-                                                <center><img src="images/product/chocolate-mini.jpg" width="420" height="420"/></center>
-                                            </div>
-                                            <div class="item">
-                                                <center><img src="images/product/chocolate-jumbo.jpg" width="420" height="420"/></center>
-                                            </div>
-                                            <div class="item">
-                                                <center><img src="images/product/chocolate-jumbo1.jpg" width="420" height="420"/></center>
-                                            </div>
-                                            <div class="item">
-                                                <center><img src="images/product/chocolate-jumbo2.jpg" width="420" height="420"/></center>
-                                            </div>
-                                        </div>
-
-                                        <!-- Controls -->
-                                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="strawberry">
-                                    <div id="carousel-example" class="carousel slide" data-ride="carousel">
-                                        <!-- Indicators -->
-                                        <ol class="carousel-indicators">
-                                            <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
-                                            <li data-target="#carousel-example" data-slide-to="1"></li>
-                                            <li data-target="#carousel-example" data-slide-to="2"></li>
-                                            <li data-target="#carousel-example" data-slide-to="3"></li>
-                                        </ol>
-
-                                        <!-- Wrapper for slides -->
-                                        <div class="carousel-inner" role="listbox">
-                                            <div class="item active">
-                                                <center><img src="images/product/strawberry-mini.jpg" width="420" height="420"/></center>
-                                            </div>
-                                            <div class="item">
-                                                <center><img src="images/product/strawberry-jumbo.jpg" width="420" height="420"/></center>
-                                            </div>
-                                            <div class="item">
-                                                <center><img src="images/product/strawberry-jumbo1.jpg" width="420" height="420"/></center>
-                                            </div>
-                                            <div class="item">
-                                                <center><img src="images/product/strawberry-jumbo2.jpg" width="420" height="420"/></center>
-                                            </div>
-                                        </div>
-
-                                        <!-- Controls -->
-                                        <a class="left carousel-control" href="#carousel-example" role="button" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="right carousel-control" href="#carousel-example" role="button" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="vanillaoreo">
-                                    <div id="carousel-example-gen" class="carousel slide" data-ride="carousel">
-                                        <!-- Indicators -->
-                                        <ol class="carousel-indicators">
-                                            <li data-target="#carousel-example-gen" data-slide-to="0" class="active"></li>
-                                            <li data-target="#carousel-example-gen" data-slide-to="1"></li>
-                                            <li data-target="#carousel-example-gen" data-slide-to="2"></li>
-                                            <li data-target="#carousel-example-gen" data-slide-to="3"></li>
-                                        </ol>
-
-                                        <!-- Wrapper for slides -->
-                                        <div class="carousel-inner" role="listbox">
-                                            <div class="item active">
-                                                <center><img src="images/product/vanillaoreo-mini.jpg" width="420" height="420" /></center>
-                                            </div>
-                                            <div class="item">
-                                                <center><img src="images/product/vanillaoreo-jumbo.jpg" width="420" height="420"/></center>
-                                            </div>
-                                            <div class="item">
-                                                <center><img src="images/product/vanillaoreo-jumbo1.jpg" width="420" height="420"/></center>
-                                            </div>
-                                            <div class="item">
-                                                <center><img src="images/product/vanillaoreo-jumbo2.jpg" width="420" height="420"/></center>
-                                            </div>
-                                        </div>
-
-                                        <!-- Controls -->
-                                        <a class="left carousel-control" href="#carousel-example-gen" role="button" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="right carousel-control" href="#carousel-example-gen" role="button" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- #END# Task Info -->
+                <!-- Browser Usage -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="card">
+                        <div class="header">
+                            <h2>BROWSER USAGE</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div id="donut_chart" class="dashboard-donut-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Browser Usage -->
             </div>
-            <!-- #Info -->
+        </div>
     </section>
 
     <!-- Modal -->
     <div class="modal fade" id="modallogout" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-sm" role="document">
-                <!-- konten modal-->
-                    <div class="modal-content">
-                        <!-- heading modal -->
-                        <div class="modal-header" style="background: #FFCCCC;">
-                            <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
-                                >
-                        </div>
-                        <!-- body modal -->
-                        <div class="modal-body">
-                            <h5>Are you sure you want to logout?</h5>
-                        </div>
-                        <!-- footer modal -->
-                        <div class="modal-footer">
-                            <a href="logout.php">
-                                <button type="button" class="btn btn-danger waves-effect">Yes</button>
-                                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancel</button>
-                            </a>
-                        </div>
+        <div class="modal-dialog modal-sm" role="document">
+            <!-- konten modal-->
+                <div class="modal-content">
+                    <!-- heading modal -->
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
+                            >
                     </div>
-            </div>
+                    <!-- body modal -->
+                    <div class="modal-body">
+                        <h5>Are you sure you want to logout?</h5>
+                    </div>
+                    <!-- footer modal -->
+                    <div class="modal-footer">
+                        <a href="logout.php">
+                            <button type="button" class="btn btn-link waves-effect">Yes</button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancel</button>
+                        </a>
+                    </div>
+                </div>
         </div>
+    </div>
     <!-- #Modal -->
 
     <!-- Jquery Core Js -->

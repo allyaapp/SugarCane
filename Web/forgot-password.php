@@ -1,4 +1,23 @@
-﻿<!DOCTYPE html>
+﻿<?php
+session_start();
+require "config/koneksi.php";
+require "config/function.php";
+
+if (isset($_SESSION["login"])) {
+    header("Location: index.php");
+    exit;
+}
+
+// cek login
+if (isset($_POST['login'])) {
+    if (login($_POST) == false) {
+        $error = true;
+    }
+}
+
+
+?>
+<!DOCTYPE html>
 <html>
 
 <head>
