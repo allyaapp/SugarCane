@@ -4,10 +4,13 @@ require ("../koneksi.php");
 
 session_start();
 
+if(!isset($_SESSION['id'])){
+    $_SESSION['msg'] = 'Anda harus login untuk mengakses halaman ini!';
+    header('Location: login.php');
+}
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
-$sesImg = $_SESSION['foto'];
 
 ?>
 <!DOCTYPE html>
@@ -19,7 +22,7 @@ $sesImg = $_SESSION['foto'];
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Our Product | SUGAR CANE</title>
     <!-- Favicon-->
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -68,13 +71,14 @@ $sesImg = $_SESSION['foto'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo "../$sesImg"; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
+                            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
+                            <img class="img-profile rounded-circle" src="../images/user.png" width="70%" style="border-radius: 50px;">
                         </a>
 
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="../editprofile.php"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                         </ul>
                     </li>
                     <!-- #User Info -->
@@ -94,35 +98,35 @@ $sesImg = $_SESSION['foto'];
                         <li>
                             <a href="../index.php">
                                 <i class="material-icons">home</i>
-                                <span>DASHBOARD</span>
+                                <span>Dashboard</span>
                             </a>
                         </li>
                         <li>
                             <a href="../admin/adminhome.php">
                                 <i class="material-icons">account_box</i>
-                                <span>ADMIN</span>
+                                <span>Admins</span>
                             </a>
                         </li>
                         <li>
                             <a href="../user/userhome.php">
                                 <i class="material-icons">person</i>
-                                <span>USER</span>
+                                <span>Users</span>
                             </a>
                         </li>
                         <li class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">library_books</i>
-                                <span>PRODUCT</span>
+                                <span>Data Barang</span>
                             </a>
                             <ul class="ml-menu">
                                 <li class="active">
                                     <a href="baranghome.php">
-                                        <span>PRODUCT</span>
+                                        <span>Barang</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="detailukuran.php">
-                                        <span>SIZE DETAILS</span>
+                                        <span>Detail Ukuran</span>
                                     </a>
                                 </li>
                             </ul>
@@ -130,17 +134,17 @@ $sesImg = $_SESSION['foto'];
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">assessment</i>
-                                <span>TRANSACTION</span>
+                                <span>Transaksi</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
                                     <a href="../transaksi/transaksihome.php">
-                                        <span>TRANSACTION</span>
+                                        <span>Transaksi</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="../transaksi/detailtransaksi.php">
-                                        <span>TRANSACTION DETAILS</span>
+                                        <span>Order</span>
                                     </a>
                                 </li>
                             </ul>
@@ -186,12 +190,11 @@ $sesImg = $_SESSION['foto'];
                                             <th>Ukuran</th>
                                             <th>Detail Ukuran</th>
                                             <th>Stok</th>
-                                            <th>Gambar</th>
                                             <th>Menu</th>
                                         </tr>
                                     </thead>
                                     <?php 
-                                        $batas = 8;
+                                        $batas = 10;
                                         $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
                                         $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;    
 
@@ -218,7 +221,6 @@ $sesImg = $_SESSION['foto'];
                                             $ukuran = $row['ukuran'];
                                             $detailukuran = $row['id_detailukuran'];
                                             $stok = $row['stok'];
-                                            $gambar = $row['gambar'];
                                     ?>
                                     <tbody>
                                         <tr>
@@ -227,12 +229,11 @@ $sesImg = $_SESSION['foto'];
                                             <td><?php echo $ukuran; ?></td>
                                             <td><?php echo $detailukuran; ?></td>
                                             <td><?php echo $stok; ?></td>
-                                            <td><?php echo "<center><img src='../$gambar' width='160' height='160'></center>" ?></td>
                                             <td>
                                                 <a href="barangedit.php?id=<?php echo $row['id_barang']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
                                                 </a>
-                                                <a href="barangdelete.php?id=<?php echo $row['id_barang'];?>" onclick="return confirm('Do you want to delete these records? This action cannot be undone. You will be unable to recover any data.');">
+                                                <a href="barangdelete.php?id=<?php echo $row['id_barang']; ?>">
                                                     <input type="button" class="btn btn-danger" value="Delete" name="delete" <?php echo $dis; ?>>
                                                 </a>
                                             </td>
@@ -281,7 +282,7 @@ $sesImg = $_SESSION['foto'];
                 <!-- konten modal-->
                     <div class="modal-content">
                         <!-- heading modal -->
-                        <div class="modal-header" style="background: #FFCCCC;">
+                        <div class="modal-header">
                             <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
                                 >
                         </div>
@@ -292,8 +293,8 @@ $sesImg = $_SESSION['foto'];
                         <!-- footer modal -->
                         <div class="modal-footer">
                             <a href="../logout.php">
-                                <button type="button" class="btn btn-danger waves-effect">Yes</button>
-                                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-link waves-effect">Yes</button>
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancel</button>
                             </a>
                         </div>
                     </div>
@@ -321,8 +322,10 @@ $sesImg = $_SESSION['foto'];
     <script src="../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
     <!-- Custom Js -->
     <script src="../js/admin.js"></script>
