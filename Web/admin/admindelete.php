@@ -2,13 +2,18 @@
 
 require ('../koneksi.php');
 	$id = $_GET['id'];
-	$nama = $row['fullname'];
-	$no_hp = $row['no_hp'];
-	$alamat = $row['alamat'];
-	$username = $row['username'];
-	$password = $row['password'];
-	$role = $row['role'];
-mysqli_query($koneksi, "DELETE FROM admindetail WHERE '$id' = id_admin") or die (mysql_error());
-header('Location: adminhome.php ');
+    $result = mysqli_query($koneksi, "SELECT * FROM admindetail WHERE id_admin='$id'");
+    $row = mysqli_fetch_array($result);
+	$pict = $row['foto'];
+	unlink('../images/admin/'.$pict);
+
+	$query = mysqli_query($koneksi, "DELETE FROM admindetail WHERE id_admin='$id'");
+
+	if ($query) {
+		header('Location: adminhome.php');
+	}else {
+		echo "<script> alert('The record couldn't be deleted!')</script>";
+		echo "<script> location='adminhome.php'; </script>";
+	}
 
 ?>

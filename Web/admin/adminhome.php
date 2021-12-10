@@ -4,9 +4,12 @@ require ("../koneksi.php");
 
 session_start();
 
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
+$sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
 ?>
 <!DOCTYPE html>
@@ -16,9 +19,9 @@ $sesLvl = $_SESSION['role'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Admin's Data | SUGAR CANE</title>
+    <title>Admins Data | SUGAR CANE</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -67,13 +70,14 @@ $sesLvl = $_SESSION['role'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><!-- <?php echo $sesName; ?> --></div>
-                            <img class="img-profile rounded-circle" src="../images/user.png" width="70%" style="border-radius: 50px;">
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
+                                <li>
+                                    <a href="../editprofile.php"><i class="material-icons">person</i>Profile</a>
+                                </li>
                             <div class="dropdown-divider"></div>
                         </ul>
                     </li>
@@ -94,35 +98,35 @@ $sesLvl = $_SESSION['role'];
                         <li>
                             <a href="../index.php">
                                 <i class="material-icons">home</i>
-                                <span>Dashboard</span>
+                                <span>DASHBOARD</span>
                             </a>
                         </li>
                         <li class="active">
                             <a href="adminhome.php">
                                 <i class="material-icons">account_box</i>
-                                <span>Admins</span>
+                                <span>ADMIN</span>
                             </a>
                         </li>
                         <li>
                             <a href="../user/userhome.php">
                                 <i class="material-icons">person</i>
-                                <span>Users</span>
+                                <span>USER</span>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">library_books</i>
-                                <span>Data Barang</span>
+                                <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
                                     <a href="../barang/baranghome.php">
-                                        <span>Barang</span>
+                                        <span>PRODUCT</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="../barang/detailukuran.php">
-                                        <span>Detail Ukuran</span>
+                                        <span>SIZE DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -130,17 +134,17 @@ $sesLvl = $_SESSION['role'];
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">assessment</i>
-                                <span>Transaksi</span>
+                                <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
                                     <a href="../transaksi/transaksihome.php">
-                                        <span>Transaksi</span>
+                                        <span>TRANSACTION</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="../transaksi/detailtransaksi.php">
-                                        <span>Order</span>
+                                        <span>TRANSACTION DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -167,7 +171,7 @@ $sesLvl = $_SESSION['role'];
                     <div class="card">
                         <div class="header">
                             <h2>
-                                ADMIN's DATA
+                                ADMINS DATA
                             </h2>
                             <a href="admincreate.php"> 
                                 <button type="button" class="btn bg-light-green waves-effect" style="border-radius: 3px;">
@@ -187,6 +191,7 @@ $sesLvl = $_SESSION['role'];
                                             <th>Alamat</th>
                                             <th>Username</th>
                                             <th>Role</th>
+                                            <th>Foto</th>
                                             <th>Menu</th>
                                         </tr>
                                     </thead>
@@ -219,6 +224,7 @@ $sesLvl = $_SESSION['role'];
                                             $alamat = $row['alamat'];
                                             $username = $row['username'];
                                             $role = $row['role'];
+                                            $foto = $row['foto'];
                                     ?>
                                     <tbody>
                                         <tr>
@@ -228,11 +234,12 @@ $sesLvl = $_SESSION['role'];
                                             <td><?php echo $alamat; ?></td>
                                             <td><?php echo $username; ?></td>
                                             <td><?php echo $role; ?></td>
+                                            <td><?php echo "<center><img src='../images/admin/$foto' width='120' height='120'></center>" ?></td>
                                             <td>
                                                 <a href="adminedit.php?id=<?php echo $row['id_admin']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
                                                 </a>
-                                                <a href="admindelete.php?id=<?php echo $row['id_admin']; ?>">
+                                                <a href="admindelete.php?id=<?php echo $row['id_admin'];?>" onclick="return confirm('Do you want to delete these records? This action cannot be undone. You will be unable to recover any data.');">
                                                     <input type="button" class="btn btn-danger" value="Delete" name="delete" <?php echo $dis; ?>>
                                                 </a>
                                             </td>
@@ -281,7 +288,7 @@ $sesLvl = $_SESSION['role'];
                 <!-- konten modal-->
                     <div class="modal-content">
                         <!-- heading modal -->
-                        <div class="modal-header">
+                        <div class="modal-header" style="background: #FFCCCC;">
                             <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
                                 >
                         </div>
@@ -292,8 +299,8 @@ $sesLvl = $_SESSION['role'];
                         <!-- footer modal -->
                         <div class="modal-footer">
                             <a href="../logout.php">
-                                <button type="button" class="btn btn-link waves-effect">Yes</button>
-                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger waves-effect">Yes</button>
+                                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancel</button>
                             </a>
                         </div>
                     </div>
@@ -324,10 +331,8 @@ $sesLvl = $_SESSION['role'];
     <script src="../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
     <!-- Custom Js -->
     <script src="../js/admin.js"></script>
