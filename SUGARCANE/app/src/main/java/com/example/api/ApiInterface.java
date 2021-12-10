@@ -21,8 +21,7 @@ public interface ApiInterface {
     @POST("register.php")
     Call<Register> registerResponse(
             @Field("username") String username,
-            @Field("no_hp") String phone,
             @Field("password") String password,
             @Field("fullname") String fullname,
-            String ConfirmPassword);
+            @Field("no_hp") String nohp);
 }

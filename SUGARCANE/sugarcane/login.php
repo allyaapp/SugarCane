@@ -35,7 +35,7 @@ if ($_POST) {
             ];
         } else {
             $response['status'] = false;
-            $response['message'] = "Username anda salah";
+            $response['message'] = "Username atau password anda salah";
         }
     }
 

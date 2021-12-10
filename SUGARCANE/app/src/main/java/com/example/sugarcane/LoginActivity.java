@@ -27,8 +27,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ApiInterface apiInterface;
     SessionManager sessionManager;
 
-    String message;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tvRegister:
                 Intent intent = new Intent(this,RegisterActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -76,11 +75,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(LoginActivity.this, response.body().getLoginData().getName(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
-                    finish();
-                    message = "Login was succesfull";
                 } else {
                     Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    message = "Invalid Login";
                 }
 
             }
@@ -88,7 +84,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<Login> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                message = "Invalid Login";
             }
         });
 

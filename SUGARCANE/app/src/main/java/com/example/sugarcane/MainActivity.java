@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity{
+    ImageButton btnProfil, btnLogout;
     TextView etUsername;
     SessionManager sessionManager;
     String username;
@@ -24,12 +27,29 @@ public class MainActivity extends AppCompatActivity{
             moveToLogin();
         }
 
+        btnLogout = (ImageButton) findViewById(R.id.btn_logout);
+        btnProfil = (ImageButton) findViewById(R.id.btn_prof);
         etUsername = findViewById(R.id.MainUsername);
         username = sessionManager.getUserDetail().get(SessionManager.USERNAME);
 
         etUsername.setText(username);
 
+        btnProfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, profile.class));
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToLogin();
+            }
+        });
     }
+
+
 
     private void moveToLogin() {
         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
@@ -37,5 +57,5 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
         finish();
     }
-    }
+}
 

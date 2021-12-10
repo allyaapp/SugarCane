@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SUGARCANE">
         <activity
+            android:name=".profile"
+            android:exported="true" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity
