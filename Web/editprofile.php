@@ -3,9 +3,12 @@ require ('koneksi.php');
 
 session_start();
 
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
+$sesImg = $_SESSION['foto'];
+$path = 'images/admin/';
 
 if(isset($_POST['update'])){
         $id = $_POST['id_admin'];
@@ -20,8 +23,7 @@ if(isset($_POST['update'])){
         header('Location: editprofile.php');
 }
 
-    $sesid_admin = $_SESSION['id'];
-    $query = "SELECT * FROM admindetail WHERE id_admin='$sesid_admin'";
+    $query = "SELECT * FROM admindetail WHERE id_admin='$sesID'";
     $result = mysqli_query($koneksi, $query) or die (mysql_error());
     while ($row = mysqli_fetch_array($result)){
         $id_admin = $row['id_admin'];
@@ -38,7 +40,7 @@ if(isset($_POST['update'])){
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Sign In | SUGAR CANE</title>
+    <title>Profile | SUGAR CANE</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -61,16 +63,16 @@ if(isset($_POST['update'])){
 
 <body class="login-page">
     <div class="login-box">
-        <div class="logo">
-            <small><img src="images/logo.png" alt="avatar" width="70%"></small>
-        </div>
         <div class="card">
             <div class="body">
-                <center><p><b>Profile</b></p></center>
+                <center><img src="<?php echo $path.$sesImg; ?>" alt="avatar" width="160" height="160"
+                    style="margin-top: -60px;
+                    border-radius:90px;">
+                </center>
                 <form id="sign_in" method="POST" action="editprofile.php">
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">person</i>
+                            <i class="material-icons">assignment_ind</i>
                         </span>
                         <div class="form-line">
                             <input type="text" class="form-control" name="id_admin" value="<?php echo $id_admin;?>" required autofocus>
@@ -78,7 +80,7 @@ if(isset($_POST['update'])){
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
+                            <i class="material-icons">face</i>
                         </span>
                         <div class="form-line">
                             <input type="text" class="form-control" name="fullname" value="<?php echo $fullname;?>" required>
@@ -86,7 +88,7 @@ if(isset($_POST['update'])){
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
+                            <i class="material-icons">location_on</i>
                         </span>
                         <div class="form-line">
                             <input type="text" class="form-control" name="alamat" value="<?php echo $alamat;?>" required>
@@ -94,7 +96,7 @@ if(isset($_POST['update'])){
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
+                            <i class="material-icons">call</i>
                         </span>
                         <div class="form-line">
                             <input type="text" class="form-control" name="no_hp" value="<?php echo $no_hp;?>" required>
@@ -102,7 +104,7 @@ if(isset($_POST['update'])){
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
+                            <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
                             <input type="text" class="form-control" name="username" value="<?php echo $username;?>" required>
@@ -130,29 +132,29 @@ if(isset($_POST['update'])){
     </div>
 
     <!-- Jquery Core Js -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core Js -->
-    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.js"></script>
 
     <!-- Select Plugin Js -->
-    <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
 
     <!-- Slimscroll Plugin Js -->
-    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
 
     <!-- Bootstrap Notify Plugin Js -->
-    <script src="../../plugins/bootstrap-notify/bootstrap-notify.js"></script>
+    <script src="plugins/bootstrap-notify/bootstrap-notify.js"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script src="../../plugins/node-waves/waves.js"></script>
+    <script src="plugins/node-waves/waves.js"></script>
 
     <!-- Custom Js -->
-    <script src="../../js/admin.js"></script>
-    <script src="../../js/pages/ui/dialogs.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/pages/ui/dialogs.js"></script>
 
     <!-- Demo Js -->
-    <script src="../../js/demo.js"></script>
+    <script src="js/demo.js"></script>
 
     <!-- Validation Plugin Js -->
     <script src="plugins/jquery-validation/jquery.validate.js"></script>

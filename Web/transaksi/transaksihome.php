@@ -4,10 +4,12 @@ require ("../koneksi.php");
 
 session_start();
 
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 $sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
 ?>
 <!DOCTYPE html>
@@ -74,7 +76,7 @@ $sesImg = $_SESSION['foto'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo "../$sesImg"; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
@@ -187,6 +189,7 @@ $sesImg = $_SESSION['foto'];
                                             <th>No.</th>
                                             <th>ID Transaksi</th>
                                             <th>ID User</th>
+                                            <th>Nama User</th>
                                             <th>Tanggal Transaksi</th>
                                             <th>Total Harga</th>
                                             <th>Menu</th>
@@ -203,8 +206,10 @@ $sesImg = $_SESSION['foto'];
                                         $data = mysqli_query($koneksi, "SELECT * FROM transaksi");
                                         $jumlah_data = mysqli_num_rows($data);
                                         $total_halaman = ceil($jumlah_data / $batas);
-
-                                        $query = "SELECT * FROM transaksi limit $halaman_awal, $batas";
+                                        
+                                        $query = "SELECT transaksi.id_transaksi, transaksi.id_user, user.id_user, user.fullname, transaksi.tgltransaksi, transaksi.totalharga FROM transaksi 
+                                            INNER JOIN user ON transaksi.id_user = user.id_user 
+                                            limit $halaman_awal, $batas";
                                         $result = mysqli_query($koneksi, $query);
                                         $no = $halaman_awal+1;
 
@@ -215,18 +220,16 @@ $sesImg = $_SESSION['foto'];
                                         }
 
                                         while ($row = mysqli_fetch_array($result)){
-                                            $id_t = $row['id_transaksi'];
-                                            $id_u = $row['id_user'];
-                                            $tgl = $row['tgltransaksi'];
-                                            $total = $row['totalharga'];
+
                                     ?>
                                     <tbody>
                                         <tr>
                                             <td><?php echo $no++; ?></td>
-                                            <td><?php echo $id_t; ?></td>
-                                            <td><?php echo $id_u; ?></td>
-                                            <td><?php echo $tgl; ?></td>
-                                            <td><?php echo $total; ?></td>
+                                            <td><?php echo $row['id_transaksi']; ?></td>
+                                            <td><?php echo $row['id_user']; ?></td>
+                                            <td><?php echo $row['fullname']; ?></td>
+                                            <td><?php echo $row['tgltransaksi']; ?></td>
+                                            <td><?php echo $row['totalharga']; ?></td>
                                             <td>
                                                 <a href="transaksiedit.php?id=<?php echo $row['id_transaksi']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
@@ -299,7 +302,7 @@ $sesImg = $_SESSION['foto'];
             </div>
         </div>
         <!-- #Modal -->
-
+        
     <!-- Jquery Core Js -->
     <script src="../plugins/jquery/jquery.min.js"></script>
 

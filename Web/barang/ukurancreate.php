@@ -4,12 +4,27 @@ require ("../koneksi.php");
 
 session_start();
 
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 $sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
+if(isset ($_POST['create']) ){
+    //mengambil nilai dari form
+    $id = $_POST['id_detailukuran'];
+    $varian = $_POST['varianukuran'];
+    $harga = $_POST['harga'];
+    
+    //query create
+    $query = "INSERT INTO detailukuran VALUES ('$id', '$varian', '$harga')";
+    $result = mysqli_query($koneksi, $query);
+    header('Location: detailukuran.php');
+}
+  
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -17,7 +32,7 @@ $sesImg = $_SESSION['foto'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Size Details | SUGAR CANE</title>
+    <title>Create Product Size Data | SUGAR CANE</title>
     <!-- Favicon-->
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
@@ -30,6 +45,9 @@ $sesImg = $_SESSION['foto'];
 
     <!-- Waves Effect Css -->
     <link href="../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="../css/style.css" rel="stylesheet">
@@ -68,7 +86,7 @@ $sesImg = $_SESSION['foto'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo "../$sesImg"; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
 
                         <!-- Dropdown - User Information -->
@@ -155,115 +173,50 @@ $sesImg = $_SESSION['foto'];
                 <button type="button" data-color="red" class="btn bg-red btn-block waves-effect m-r-20" data-toggle="modal" data-target="#modallogout">LOGOUT</button>
             </div>
             <!-- #Footer -->
+
         </aside>
         <!-- #END# Left Sidebar -->
         </section>
 
         <!-- Content -->
             <section class="content">
-                <div class="container-fluid">
+            <!--  Validation -->
+            <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                SIZE DETAILS
-                            </h2>
-                            <a href="ukurancreate.php"> 
-                                <button type="button" class="btn bg-light-green waves-effect" style="border-radius: 3px;">
-                                    <i class="material-icons">create</i>
-                                    <span>Create Data</span>
-                                </button>
-                            </a>
+                            <h2>CREATE DATA</h2>
                         </div>
                         <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>ID Detail Ukuran</th>
-                                            <th>Ukuran</th>
-                                            <th>Harga</th>
-                                            <th>Menu</th>
-                                        </tr>
-                                    </thead>
-                                    <?php 
-                                        $batas = 10;
-                                        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
-                                        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;    
-
-                                        $previous = $halaman - 1;
-                                        $next = $halaman + 1;
-                                        
-                                        $data = mysqli_query($koneksi, "SELECT * FROM detailukuran");
-                                        $jumlah_data = mysqli_num_rows($data);
-                                        $total_halaman = ceil($jumlah_data / $batas);
-
-                                        $query = "SELECT * FROM detailukuran";
-                                        $result = mysqli_query($koneksi, $query);
-                                        $no = $halaman_awal+1;
-
-                                        if ($sesLvl == 1){
-                                            $dis = "";
-                                        } else {
-                                            $dis = "disabled";
-                                        }
-
-                                        while ($row = mysqli_fetch_array($result)){
-                                            $id = $row['id_detailukuran'];
-                                            $ukuran = $row['varianukuran'];
-                                            $harga = $row['harga'];
-                                    ?>
-                                    <tbody>
-                                        <tr>
-                                            <td><?php echo $no++; ?></td>
-                                            <td><?php echo $id; ?></td>
-                                            <td><?php echo $ukuran; ?></td>
-                                            <td><?php echo $harga; ?></td>
-                                            <td>
-                                                <a href="ukuranedit.php?id=<?php echo $row['id_detailukuran']; ?>">
-                                                    <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
-                                                </a>
-                                                <a href="ukurandelete.php?id=<?php echo $row['id_detailukuran'];?>" onclick="return confirm('Do you want to delete these records? This action cannot be undone. You will be unable to recover any data.');">
-                                                    <input type="button" class="btn btn-danger" value="Delete" name="delete" <?php echo $dis; ?>>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <?php 
-                                            }
-                                        ?>
-                                    </tbody>
-                                </table>
-                                <nav>
-                                    <ul class="pagination table-bordered">
-                                        <li>
-                                            <a class="waves-effect" <?php if($halaman > 1){ echo "href='detailukuran.php?halaman=$previous'";} ?> >
-                                                PREVIOUS
-                                                <!-- <i class="material-icons">chevron_left</i> -->
-                                            </a>
-                                        </li>
-
-                                        <?php 
-                                            for($x=1; $x<=$total_halaman; $x++){
-                                        ?>
-                                            <li><a class="waves-effect" href="detailukuran.php?halaman=<?php echo $x ?>"><?php echo $x; ?><!-- &nbsp;&nbsp;| --></a></li>
-                                        <?php
-                                            }
-                                        ?>  
-
-                                        <li>
-                                            <a class="waves-effect" <?php if($halaman < $total_halaman){ echo "href='detailukuran.php?halaman=$next'";} ?>>
-                                                NEXT
-                                                <!-- <i class="material-icons">chevron_right</i> -->
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+                            <form id="form_validation" method="POST">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="id_detailukuran" required>
+                                        <label class="form-label">ID Detail Ukuran</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="varianukuran" required>
+                                        <label class="form-label">Varian Ukuran</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="harga" required>
+                                        <label class="form-label">Harga</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary waves-effect" type="submit" name="create">CREATE</button>
+                                <a href="detailukuran.php">
+                                    <button class="btn btn-danger waves-effect" type="button">CANCEL</button>
+                                </a>
+                            </form>
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
+            <!-- #END# Validation -->
             </section>
         <!-- #Content -->
 
@@ -325,5 +278,4 @@ $sesImg = $_SESSION['foto'];
     <!-- Demo Js -->
     <script src="../js/demo.js"></script>
 </body>
-
 </html>

@@ -4,17 +4,21 @@ require ("../koneksi.php");
 
 session_start();
 
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 $sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
     if(isset($_POST['update']) ){
+        //mengambil nilai dari form
         $id_transaksi = $_POST['id_transaksi'];
         $id_user = $_POST['id_user'];
         $tgltransaksi = $_POST['tgltransaksi'];
         $totalharga = $_POST['totalharga'];
 
+        //query edit data
         $query = "UPDATE transaksi SET id_user='$id_user', tgltransaksi='$tgltransaksi', totalharga='$totalharga' WHERE id_transaksi='$id_transaksi'";
         $result = mysqli_query($koneksi, $query);
         header('Location: transaksihome.php');
@@ -24,6 +28,7 @@ $sesImg = $_SESSION['foto'];
     $query = "SELECT * FROM transaksi WHERE id_transaksi='$id'";
     $result = mysqli_query($koneksi, $query) or die (mysql_error());;
             
+    //menampilkan data pada database menggunakan array
     while ($row = mysqli_fetch_array($result)){
         $id_transaksi = $row['id_transaksi'];
         $id_user = $row['id_user'];
@@ -93,7 +98,7 @@ $sesImg = $_SESSION['foto'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo "../$sesImg"; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">

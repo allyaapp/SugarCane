@@ -4,17 +4,21 @@ require ("../koneksi.php");
 
 session_start();
 
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 $sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
 if(isset ($_POST['create']) ){
+    //mengambil nilai dari form.
     $id_transaksi = $_POST['id_transaksi'];
     $id_user = $_POST['id_user'];
     $tgltransaksi = $_POST['tgltransaksi'];
     $totalharga = $_POST['totalharga'];
 
+    //query create 
     $query = "INSERT INTO transaksi VALUES ('', '$id_user', '$tgltransaksi', '$totalharga')";
     $result = mysqli_query($koneksi, $query);
     header('Location: transaksihome.php');
@@ -45,6 +49,9 @@ if(isset ($_POST['create']) ){
 
     <!-- Animation Css -->
     <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="../plugins/morrisjs/morris.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="../css/style.css" rel="stylesheet">
@@ -83,7 +90,7 @@ if(isset ($_POST['create']) ){
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo "../$sesImg"; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
@@ -192,9 +199,9 @@ if(isset ($_POST['create']) ){
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
+                                    <label class="form-label m-r-20" style="color: lightgray">Tanggal Transaksi</label>
                                     <div class="form-line">
                                         <input type="date" class="form-control" name="tgltransaksi" required>
-                                        <label class="form-label">Tanggal Transaksi</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">

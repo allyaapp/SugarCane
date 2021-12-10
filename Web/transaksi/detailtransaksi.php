@@ -4,10 +4,12 @@ require ("../koneksi.php");
 
 session_start();
 
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 $sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
 ?>
 <!DOCTYPE html>
@@ -71,7 +73,7 @@ $sesImg = $_SESSION['foto'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo "../$sesImg"; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
 
                         <!-- Dropdown - User Information -->
@@ -186,6 +188,9 @@ $sesImg = $_SESSION['foto'];
                                             <th>ID Pesanan</th>
                                             <th>ID Transaksi</th>
                                             <th>ID Barang</th>
+                                            <th>Varian</th>
+                                            <th>ID Detail Ukuran</th>
+                                            <th>Harga</th>
                                             <th>Quantity</th>
                                             <th>Sub Harga</th>
                                             <th>Menu</th>
@@ -203,7 +208,12 @@ $sesImg = $_SESSION['foto'];
                                         $jumlah_data = mysqli_num_rows($data);
                                         $total_halaman = ceil($jumlah_data / $batas);
 
-                                        $query = "SELECT * FROM pesanan limit $halaman_awal, $batas";
+                                        $query = "SELECT pesanan.id_pesanan, pesanan.id_transaksi, pesanan.id_barang, transaksi.id_transaksi, barang.id_barang, barang.varian, barang.id_detailukuran, detailukuran.id_detailukuran, detailukuran.harga, pesanan.qty, pesanan.subharga
+                                            FROM pesanan
+                                            INNER JOIN transaksi ON pesanan.id_transaksi = transaksi.id_transaksi
+                                            INNER JOIN barang ON pesanan.id_barang = barang.id_barang
+                                            INNER JOIN detailukuran ON barang.id_detailukuran = detailukuran.id_detailukuran
+                                            limit $halaman_awal, $batas";
                                         $result = mysqli_query($koneksi, $query);
                                         $no = $halaman_awal+1;
 
@@ -213,21 +223,21 @@ $sesImg = $_SESSION['foto'];
                                             $dis = "disabled";
                                         }
 
+                                        //Menampilkan data dalam database menggunakan array
                                         while ($row = mysqli_fetch_array($result)){
-                                            $id_pesanan = $row['id_pesanan'];
-                                            $id_transaksi = $row['id_transaksi'];
-                                            $id_barang= $row['id_barang'];
-                                            $qty= $row['qty'];
-                                            $subharga= $row['subharga'];
+
                                     ?>
                                     <tbody>
                                         <tr>
                                             <td><?php echo $no++; ?></td>
-                                            <td><?php echo $id_pesanan; ?></td>
-                                            <td><?php echo $id_transaksi; ?></td>
-                                            <td><?php echo $id_barang; ?></td>
-                                            <td><?php echo $qty; ?></td>
-                                            <td><?php echo $subharga; ?></td>
+                                            <td><?php echo $row['id_pesanan']; ?></td>
+                                            <td><?php echo $row['id_transaksi']; ?></td>
+                                            <td><?php echo $row['id_barang']; ?></td>
+                                            <td><?php echo $row['varian']; ?></td>
+                                            <td><?php echo $row['id_detailukuran']; ?></td>
+                                            <td><?php echo $row['harga']; ?></td>
+                                            <td><?php echo $row['qty']; ?></td>
+                                            <td><?php echo $row['subharga']; ?></td>
                                             <td>
                                                 <a href="dtransaksiedit.php?id=<?php echo $row['id_pesanan']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>

@@ -1,45 +1,13 @@
-﻿<?php
-require ('koneksi.php');
+<?php
+require 'function.php';
+require 'koneksi.php';
 
-session_start();
-
-if(isset($_POST['submit']) ){ 
-    $user = $_POST['username'];
-    $pass =$_POST['password'];
-
-    if(!empty(trim($user)) && !empty(trim($pass))){
-
-        $query = "SELECT * FROM admindetail WHERE username = '$user'";
-        $result = mysqli_query($koneksi, $query);
-        $num = mysqli_num_rows($result);
-
-        while ($row = mysqli_fetch_array($result)){
-            $id = $row['id_admin'];
-            $userVal = $row['username'];
-            $passVal = $row['password'];
-            $uname = $row['fullname'];
-            $role = $row['role'];
-        }
-        if ($num != 0){
-            if($userVal==$user && $passVal==$pass) {
-                $_SESSION['id'] = $id;
-                $_SESSION['username'] = $userVal;
-                $_SESSION['role'] = $role;
-                header('Location: index.php');
-            } else{
-                // header('Location: login.php');
-                echo "<script> alert('Password atau Username yang anda masukkan salah!')</script>";
-            }
-        } else{
-            header('Location: login.php');
-            echo "User tidak ditemukan!";
-        }
-    } else{
-        echo "Data tidak boleh kosong!";
-    }
+if(isset($_POST['verify'])){
+  if(verifikasi($_POST) == false){
+    $error = true;
+  }
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,30 +41,23 @@ if(isset($_POST['submit']) ){
         </div>
         <div class="card">
             <div class="body">
-                <center><p><b>Sign In</b> to start your session.</p></center>
-                <form id="sign_in" method="POST" action="login.php">
+                <center><p><b>Profile</b></p></center>
+                <form id="" method="POST" action="">
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
+                            <input type="text" class="form-control" name="email" required autofocus>
                         </div>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="password" class="form-control" name="password" placeholder="Password" required>
-                        </div>
-                    </div>
+                    
                     <div class="row">
                         <div class="col-xs-8 p-t-5">
-                            <a href="forgot-password.php"><u>Forgot Password?</u></a>
+                            <a href="index.php"><u>Back</u></a>
                         </div>
                         <div class="col-xs-4">
-                            <button class="btn btn-block bg-green waves-effect" type="submit" name="submit">LOG IN</button>
+                            <button class="btn btn-block bg-green waves-effect" type="submit" name="verify">CHECK</button>
                         </div>
                     </div>
                 </form>

@@ -4,10 +4,12 @@ require ("../koneksi.php");
 
 session_start();
 
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 $sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
 ?>
 <!DOCTYPE html>
@@ -68,7 +70,7 @@ $sesImg = $_SESSION['foto'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo "../$sesImg"; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
 
                         <!-- Dropdown - User Information -->
@@ -227,7 +229,7 @@ $sesImg = $_SESSION['foto'];
                                             <td><?php echo $ukuran; ?></td>
                                             <td><?php echo $detailukuran; ?></td>
                                             <td><?php echo $stok; ?></td>
-                                            <td><?php echo "<center><img src='../$gambar' width='160' height='160'></center>" ?></td>
+                                            <td><?php echo "<center><img src='../images/product/$gambar' width='160' height='160'></center>" ?></td>
                                             <td>
                                                 <a href="barangedit.php?id=<?php echo $row['id_barang']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>

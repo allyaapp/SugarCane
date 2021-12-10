@@ -4,16 +4,20 @@ require ("../koneksi.php");
 
 session_start();
 
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 $sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
     if(isset($_POST['update']) ){
+        //mengambil nilai dari form
         $id_du = $_POST['id_detailukuran'];
         $varian = $_POST['varianukuran'];
         $harga = $_POST['harga'];
 
+        //query edit data
         $query = "UPDATE detailukuran SET id_detailukuran='$id_du', varianukuran='$varian', harga='$harga' WHERE id_detailukuran='$id_du'";
         $result = mysqli_query($koneksi, $query);
         header('Location: detailukuran.php');
@@ -24,6 +28,7 @@ $sesImg = $_SESSION['foto'];
     $result = mysqli_query($koneksi, $query) or die (mysql_error());
     $no = 1;
             
+    //menampilkan data pada database menggunakan array
     while ($row = mysqli_fetch_array($result)){
         $id_du = $row['id_detailukuran'];
         $varian = $row['varianukuran'];
@@ -92,7 +97,7 @@ $sesImg = $_SESSION['foto'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo "../$sesImg"; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">

@@ -12,6 +12,7 @@ $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
 $sesImg = $_SESSION['foto'];
+$path = 'images/admin/';
 
 ?>
 <!DOCTYPE html>
@@ -72,7 +73,7 @@ $sesImg = $_SESSION['foto'];
                    <!-- User Info   -->
                    <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <img class="img-profile rounded-circle" src="<?php echo $sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px;" >
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px;" >
                         </a>
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
@@ -277,6 +278,7 @@ $sesImg = $_SESSION['foto'];
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="about">
+                                    <b>Home Content</b>
                                     <p>
                                         Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
                                         Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
