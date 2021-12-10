@@ -4,20 +4,21 @@ require ("../koneksi.php");
 
 session_start();
 
-if(!isset($_SESSION['id'])){
-    $_SESSION['msg'] = 'Anda harus login untuk mengakses halaman ini!';
-    header('Location: login.php');
-}
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
+$sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
 if(isset ($_POST['create']) ){
+    //mengambil nilai dari form.
     $id_transaksi = $_POST['id_transaksi'];
     $id_user = $_POST['id_user'];
     $tgltransaksi = $_POST['tgltransaksi'];
     $totalharga = $_POST['totalharga'];
 
+    //query create 
     $query = "INSERT INTO transaksi VALUES ('', '$id_user', '$tgltransaksi', '$totalharga')";
     $result = mysqli_query($koneksi, $query);
     header('Location: transaksihome.php');
@@ -34,7 +35,7 @@ if(isset ($_POST['create']) ){
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Create Transaction Data | SUGAR CANE</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -89,14 +90,12 @@ if(isset ($_POST['create']) ){
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
-                            <img class="img-profile rounded-circle" src="../images/user.png" width="70%" style="border-radius: 50px;">
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
-                            <div class="dropdown-divider"></div>
+                            <li><a href="../editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                         </ul>
                     </li>
                     <!-- #User Info -->
@@ -116,35 +115,35 @@ if(isset ($_POST['create']) ){
                         <li>
                             <a href="../index.php">
                                 <i class="material-icons">home</i>
-                                <span>Dashboard</span>
+                                <span>DASHBOARD</span>
                             </a>
                         </li>
                         <li>
-                            <a href="..admin/adminhome.php">
+                            <a href="../admin/adminhome.php">
                                 <i class="material-icons">account_box</i>
-                                <span>Admins</span>
+                                <span>ADMIN</span>
                             </a>
                         </li>
                         <li>
                             <a href="../user/userhome.php">
                                 <i class="material-icons">person</i>
-                                <span>Users</span>
+                                <span>USER</span>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">library_books</i>
-                                <span>Data Barang</span>
+                                <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
                                     <a href="../barang/baranghome.php">
-                                        <span>Barang</span>
+                                        <span>PRODUCT</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="../barang/detailukuran.php">
-                                        <span>Detail Ukuran</span>
+                                        <span>SIZE DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -152,17 +151,17 @@ if(isset ($_POST['create']) ){
                         <li  class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">assessment</i>
-                                <span>Transaksi</span>
+                                <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
                                 <li  class="active">
                                     <a href="transaksihome.php">
-                                        <span>Transaksi</span>
+                                        <span>TRANSACTION</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="detailtransaksi.php">
-                                        <span>Order</span>
+                                        <span>TRANSACTION DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -192,29 +191,23 @@ if(isset ($_POST['create']) ){
                             <h2>CREATE DATA</h2>
                         </div>
                         <div class="body">
-                            <form id="form_validation" method="POST"><!-- 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="id_user">
-                                        <label class="form-label">ID</label>
-                                    </div>
-                                </div> -->
+                            <form id="form_validation" method="POST">
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" class="form-control" name="id_user" required>
-                                        <label class="form-label">ID USER</label>
+                                        <label class="form-label">ID User</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
+                                    <label class="form-label m-r-20" style="color: lightgray">Tanggal Transaksi</label>
                                     <div class="form-line">
                                         <input type="date" class="form-control" name="tgltransaksi" required>
-                                        <label class="form-label">TANGGAL TRANSAKSI</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" class="form-control" name="totalharga" required>
-                                        <label class="form-label">TOTAL HARGA</label>
+                                        <label class="form-label">Total Harga</label>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="create">CREATE</button>
@@ -236,7 +229,7 @@ if(isset ($_POST['create']) ){
                 <!-- konten modal-->
                     <div class="modal-content">
                         <!-- heading modal -->
-                        <div class="modal-header">
+                        <div class="modal-header" style="background: #FFCCCC;">
                             <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
                                 >
                         </div>
@@ -247,8 +240,8 @@ if(isset ($_POST['create']) ){
                         <!-- footer modal -->
                         <div class="modal-footer">
                             <a href="../logout.php">
-                                <button type="button" class="btn btn-link waves-effect">Yes</button>
-                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger waves-effect">Yes</button>
+                                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancel</button>
                             </a>
                         </div>
                     </div>

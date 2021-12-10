@@ -4,20 +4,21 @@ require ("../koneksi.php");
 
 session_start();
 
-if(!isset($_SESSION['id'])){
-    $_SESSION['msg'] = 'Anda harus login untuk mengakses halaman ini!';
-    header('Location: login.php');
-}
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
+$sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
     if(isset($_POST['update']) ){
+        //mengambil nilai dari form
         $id_transaksi = $_POST['id_transaksi'];
         $id_user = $_POST['id_user'];
         $tgltransaksi = $_POST['tgltransaksi'];
         $totalharga = $_POST['totalharga'];
 
+        //query edit data
         $query = "UPDATE transaksi SET id_user='$id_user', tgltransaksi='$tgltransaksi', totalharga='$totalharga' WHERE id_transaksi='$id_transaksi'";
         $result = mysqli_query($koneksi, $query);
         header('Location: transaksihome.php');
@@ -25,9 +26,9 @@ $sesLvl = $_SESSION['role'];
 
     $id = $_GET['id'];
     $query = "SELECT * FROM transaksi WHERE id_transaksi='$id'";
-    $result = mysqli_query($koneksi, $query) or die (mysql_error());
-    $no = 1;
+    $result = mysqli_query($koneksi, $query) or die (mysql_error());;
             
+    //menampilkan data pada database menggunakan array
     while ($row = mysqli_fetch_array($result)){
         $id_transaksi = $row['id_transaksi'];
         $id_user = $row['id_user'];
@@ -43,9 +44,9 @@ $sesLvl = $_SESSION['role'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Edit Products' Data | SUGAR CANE</title>
+    <title>Edit Transaction' Data | SUGAR CANE</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -59,9 +60,6 @@ $sesLvl = $_SESSION['role'];
 
     <!-- Animation Css -->
     <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
-
-    <!-- Morris Chart Css-->
-    <link href="../plugins/morrisjs/morris.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="../css/style.css" rel="stylesheet">
@@ -100,16 +98,12 @@ $sesLvl = $_SESSION['role'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
-                            <img class="img-profile rounded-circle" src="../images/user.png" width="70%" style="border-radius: 50px;">
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
                         <!-- Dropdown - User Information -->
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="editprofile.php"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="../logout.php"><i class="material-icons">input</i>Sign Out</a></li>
-                            <div class="dropdown-divider"></div>
+                            <li><a href="../editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                         </ul>
                     </li>
                     <!-- #User Info -->
@@ -129,35 +123,35 @@ $sesLvl = $_SESSION['role'];
                         <li>
                             <a href="../index.php">
                                 <i class="material-icons">home</i>
-                                <span>Dashboard</span>
+                                <span>DASHBOARD</span>
                             </a>
                         </li>
                         <li>
                             <a href="../admin/adminhome.php">
                                 <i class="material-icons">account_box</i>
-                                <span>Admins</span>
+                                <span>ADMIN</span>
                             </a>
                         </li>
                         <li>
                             <a href="../user/userhome.php">
                                 <i class="material-icons">person</i>
-                                <span>Users</span>
+                                <span>USER</span>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">library_books</i>
-                                <span>Data Barang</span>
+                                <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
-                                    <a href="baranghome.php">
-                                        <span>Barang</span>
+                                    <a href="../barang/baranghome.php">
+                                        <span>PRODUCT</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="detailbarang.php">
-                                        <span>Detail Ukuran</span>
+                                    <a href="../barang/detailbarang.php">
+                                        <span>SIZE DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -165,17 +159,17 @@ $sesLvl = $_SESSION['role'];
                         <li class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">assessment</i>
-                                <span>Transaksi</span>
+                                <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
                                 <li class="active">
                                     <a href="transaksihome.php">
-                                        <span>Transaksi</span>
+                                        <span>TRANSACTION</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="detailtransaksi.php">
-                                        <span>Order</span>
+                                        <span>TRANSACTION DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -209,25 +203,25 @@ $sesLvl = $_SESSION['role'];
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="id_transaksi" value="<?php echo $id_transaksi;?>" required>
-                                        <label class="form-label">ID TRANSAKSI</label>
+                                        <label class="form-label">ID Transaksi</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="id_user" value="<?php echo $id_user;?>" required>
-                                        <label class="form-label">ID USER</label>
+                                        <label class="form-label">ID User</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="date" class="form-control" name="tgltransaksi" value="<?php echo $tgltransaksi;?>" required>
-                                        <label class="form-label">TANGGAL TRANSAKSI</label>
+                                        <label class="form-label">Tanggal Transaksi</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="totalharga" value="<?php echo $totalharga;?>" required>
-                                        <label class="form-label">TOTAL HARGA</label>
+                                        <label class="form-label">Total Harga</label>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="update">UPDATE</button>
@@ -249,7 +243,7 @@ $sesLvl = $_SESSION['role'];
                 <!-- konten modal-->
                     <div class="modal-content">
                         <!-- heading modal -->
-                        <div class="modal-header">
+                        <div class="modal-header" style="background: #FFCCCC;">
                             <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
                                 >
                         </div>
@@ -260,8 +254,8 @@ $sesLvl = $_SESSION['role'];
                         <!-- footer modal -->
                         <div class="modal-footer">
                             <a href="../logout.php">
-                                <button type="button" class="btn btn-link waves-effect">Yes</button>
-                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger waves-effect">Yes</button>
+                                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancel</button>
                             </a>
                         </div>
                     </div>
@@ -290,10 +284,8 @@ $sesLvl = $_SESSION['role'];
     <script src="../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
     <!-- Custom Js -->
     <script src="../js/admin.js"></script>
