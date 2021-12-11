@@ -4,25 +4,12 @@ require ("../koneksi.php");
 
 session_start();
 
-if(!isset($_SESSION['id'])){
-    $_SESSION['msg'] = 'Anda harus login untuk mengakses halaman ini!';
-    header('Location: login.php');
-}
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
-
-    if(isset($_POST['update']) ){
-        $id = $_POST['id_barang'];
-        $varian = $_POST['varian'];
-        $ukuran = $_POST['ukuran'];
-        $id_detailukuran = $_POST['id_detailukuran'];
-        $stok = $_POST['stok'];
-
-        $query = "UPDATE barang SET varian='$varian', ukuran='$ukuran', id_detailukuran='$id_detailukuran', stok='$stok' WHERE id_barang='$id'";
-        $result = mysqli_query($koneksi, $query);
-        header('Location: baranghome.php');
-    }
+$sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
     $id = $_GET['id'];
     $query = "SELECT * FROM barang WHERE id_barang='$id'";
@@ -34,7 +21,8 @@ $sesLvl = $_SESSION['role'];
         $varian = $row['varian'];
         $ukuran = $row['ukuran'];
         $id_detailukuran = $row['id_detailukuran'];
-        $stok = $row['stok'];    
+        $stok = $row['stok'];
+        $gambar = $row['gambar'];    
 
 ?>
 
@@ -47,7 +35,7 @@ $sesLvl = $_SESSION['role'];
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Edit Products' Data | SUGAR CANE</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -102,16 +90,13 @@ $sesLvl = $_SESSION['role'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
-                            <img class="img-profile rounded-circle" src="../images/user.png" width="70%" style="border-radius: 50px;">
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
+
                         <!-- Dropdown - User Information -->
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="../logout.php"><i class="material-icons">input</i>Sign Out</a></li>
-                            <div class="dropdown-divider"></div>
+                            <li><a href="../editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                         </ul>
                     </li>
                     <!-- #User Info -->
@@ -131,53 +116,53 @@ $sesLvl = $_SESSION['role'];
                         <li>
                             <a href="../index.php">
                                 <i class="material-icons">home</i>
-                                <span>Dashboard</span>
+                                <span>DASHBOARD</span>
                             </a>
                         </li>
                         <li>
                             <a href="../admin/adminhome.php">
                                 <i class="material-icons">account_box</i>
-                                <span>Admins</span>
+                                <span>ADMIN</span>
                             </a>
                         </li>
                         <li>
                             <a href="../user/userhome.php">
                                 <i class="material-icons">person</i>
-                                <span>Users</span>
+                                <span>USER</span>
                             </a>
                         </li>
                         <li class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">library_books</i>
-                                <span>Data Barang</span>
+                                <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
                                 <li class="active">
                                     <a href="baranghome.php">
-                                        <span>Barang</span>
+                                        <span>PRODUCT</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="detailbarang.php">
-                                        <span>Detail Ukuran</span>
+                                    <a href="detailukuran.php">
+                                        <span>SIZE DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                            <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">assessment</i>
-                                <span>Transaksi</span>
+                                <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
                                     <a href="../transaksi/transaksihome.php">
-                                        <span>Transaksi</span>
+                                        <span>TRANSACTION</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="../transaksi/detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>TRANSACTION DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -186,11 +171,10 @@ $sesLvl = $_SESSION['role'];
                 </ul>
             </div>
             <!-- #Menu -->
+
             <!-- Footer -->
             <div class="legal">
-                <a href="../logout.php">
-                    <button type="button" class="btn bg-red btn-block waves-effect">LOGOUT</button>
-                </a>
+                <button type="button" data-color="red" class="btn bg-red btn-block waves-effect m-r-20" data-toggle="modal" data-target="#modallogout">LOGOUT</button>
             </div>
             <!-- #Footer -->
         </aside>
@@ -207,7 +191,7 @@ $sesLvl = $_SESSION['role'];
                             <h2>EDIT DATA</h2>
                         </div>
                         <div class="body">
-                            <form id="form_validation" method="POST" action="barangedit.php">
+                            <form id="form_validation" method="POST" action="barangedit.php" enctype="multipart/form-data">
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="id_barang" value="<?php echo $id;?>" required>
@@ -268,6 +252,15 @@ $sesLvl = $_SESSION['role'];
                                         <label class="form-label">Stok</label>
                                     </div>
                                 </div>
+                                <div class="form-group form-float">
+                                    <label class="form-label" style="color: #d3d3d3;">Foto</label>
+                                    <div class="form-line">
+                                        <div>
+                                            <img src="<?php echo "../images/product/$gambar"; ?>" width="64" height="64" alt="product">
+                                        </div>
+                                        <input type="file" class="form-control" name="gambar" value="<?php echo $gambar;?>">
+                                    </div>
+                                </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="update">UPDATE</button>
                                 <a href="baranghome.php">
                                     <button class="btn btn-danger waves-effect" type="button">CANCEL</button>
@@ -281,7 +274,32 @@ $sesLvl = $_SESSION['role'];
             </section>
         <!-- #Content -->
 
-    <!-- Jquery Core Js -->
+        <!-- Modal -->
+        <div class="modal fade" id="modallogout" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <!-- konten modal-->
+                    <div class="modal-content">
+                        <!-- heading modal -->
+                        <div class="modal-header" style="background: #FFCCCC;">
+                            <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
+                                >
+                        </div>
+                        <!-- body modal -->
+                        <div class="modal-body">
+                            <h5>Are you sure you want to logout?</h5>
+                        </div>
+                        <!-- footer modal -->
+                        <div class="modal-footer">
+                            <a href="../logout.php">
+                                <button type="button" class="btn btn-danger waves-effect">Yes</button>
+                                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancel</button>
+                            </a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- #Modal -->
+
     <!-- Jquery Core Js -->
     <script src="../plugins/jquery/jquery.min.js"></script>
 
@@ -303,13 +321,12 @@ $sesLvl = $_SESSION['role'];
     <script src="../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
     <!-- Custom Js -->
     <script src="../js/admin.js"></script>
+    <script src="../js/pages/ui/modals.js"></script>
     <script src="../js/pages/tables/jquery-datatable.js"></script>
 
     <!-- Demo Js -->
@@ -318,4 +335,33 @@ $sesLvl = $_SESSION['role'];
 </html>
 <?php 
     }
+?>
+<?php 
+if(isset($_POST['update']) ){
+        //mengambil data dari form
+        $id = $_POST['id_barang'];
+        $varian = $_POST['varian'];
+        $ukuran = $_POST['ukuran'];
+        $id_detailukuran = $_POST['id_detailukuran'];
+        $stok = $_POST['stok'];
+
+        //proses upload file
+        $folder = './images/product/';
+        $gambar = $_FILES['gambar']['name'];
+        $tmp = $_FILES['gambar']['tmp_name'];
+        move_uploaded_file($tmp, $folder.$gambar);
+
+        //percabangan, jika file foto kosong, maka update semua field kecuali foto.
+        //karena kita tidak akan mengubah foto yang sudah ada.
+        if ($gambar == '') {
+            $result = mysqli_query($koneksi, "UPDATE barang SET varian='$varian', ukuran='$ukuran', id_detailukuran='$id_detailukuran', stok='$stok' WHERE id_barang='$id'");
+            header('Location: baranghome.php');
+        } else {
+            //percabangan, jika field foto ada filenya, maka update semua field termasuk foto.
+            $result = mysqli_query($koneksi, "UPDATE barang SET varian='$varian', ukuran='$ukuran', id_detailukuran='$id_detailukuran', stok='$stok', gambar='$gambar' WHERE id_barang='$id'");
+            header('Location: baranghome.php');
+        }
+        
+    }
+
 ?>

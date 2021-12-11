@@ -4,13 +4,12 @@ require ("../koneksi.php");
 
 session_start();
 
-if(!isset($_SESSION['id'])){
-    $_SESSION['msg'] = 'Anda harus login untuk mengakses halaman ini!';
-    header('Location: login.php');
-}
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
+$sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
 ?>
 <!DOCTYPE html>
@@ -22,7 +21,7 @@ $sesLvl = $_SESSION['role'];
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Our Product | SUGAR CANE</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -33,12 +32,6 @@ $sesLvl = $_SESSION['role'];
 
     <!-- Waves Effect Css -->
     <link href="../plugins/node-waves/waves.css" rel="stylesheet" />
-
-    <!-- Animation Css -->
-    <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
-
-    <!-- Morris Chart Css-->
-    <link href="../plugins/morrisjs/morris.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="../css/style.css" rel="stylesheet">
@@ -77,14 +70,13 @@ $sesLvl = $_SESSION['role'];
                    <!-- User Info -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
-                            <img class="img-profile rounded-circle" src="../images/user.png" width="70%" style="border-radius: 50px;">
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
 
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="../editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                         </ul>
                     </li>
                     <!-- #User Info -->
@@ -104,35 +96,35 @@ $sesLvl = $_SESSION['role'];
                         <li>
                             <a href="../index.php">
                                 <i class="material-icons">home</i>
-                                <span>Dashboard</span>
+                                <span>DASHBOARD</span>
                             </a>
                         </li>
                         <li>
                             <a href="../admin/adminhome.php">
                                 <i class="material-icons">account_box</i>
-                                <span>Admins</span>
+                                <span>ADMIN</span>
                             </a>
                         </li>
                         <li>
                             <a href="../user/userhome.php">
                                 <i class="material-icons">person</i>
-                                <span>Users</span>
+                                <span>USER</span>
                             </a>
                         </li>
                         <li class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">library_books</i>
-                                <span>Data Barang</span>
+                                <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
                                 <li class="active">
                                     <a href="baranghome.php">
-                                        <span>Barang</span>
+                                        <span>PRODUCT</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="detailukuran.php">
-                                        <span>Detail Ukuran</span>
+                                        <span>SIZE DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -140,17 +132,17 @@ $sesLvl = $_SESSION['role'];
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">assessment</i>
-                                <span>Transaksi</span>
+                                <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
                                     <a href="../transaksi/transaksihome.php">
-                                        <span>Transaksi</span>
+                                        <span>TRANSACTION</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="../transaksi/detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>TRANSACTION DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -159,13 +151,13 @@ $sesLvl = $_SESSION['role'];
                 </ul>
             </div>
             <!-- #Menu -->
+
             <!-- Footer -->
             <div class="legal">
-                <a href="../logout.php">
-                    <button type="button" class="btn bg-red btn-block waves-effect">LOGOUT</button>
-                </a>
+                <button type="button" data-color="red" class="btn bg-red btn-block waves-effect m-r-20" data-toggle="modal" data-target="#modallogout">LOGOUT</button>
             </div>
             <!-- #Footer -->
+            
         </aside>
         <!-- #END# Left Sidebar -->
         </section>
@@ -196,13 +188,25 @@ $sesLvl = $_SESSION['role'];
                                             <th>Ukuran</th>
                                             <th>Detail Ukuran</th>
                                             <th>Stok</th>
+                                            <th>Gambar</th>
                                             <th>Menu</th>
                                         </tr>
                                     </thead>
                                     <?php 
-                                        $query = "SELECT * FROM barang";
+                                        $batas = 8;
+                                        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+                                        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;    
+
+                                        $previous = $halaman - 1;
+                                        $next = $halaman + 1;
+                                        
+                                        $data = mysqli_query($koneksi, "SELECT * FROM barang");
+                                        $jumlah_data = mysqli_num_rows($data);
+                                        $total_halaman = ceil($jumlah_data / $batas);
+                                
+                                        $query = "SELECT * FROM barang limit $halaman_awal, $batas";
                                         $result = mysqli_query($koneksi, $query);
-                                        $no = 1;
+                                        $no = $halaman_awal+1;
 
                                         if ($sesLvl == 1){
                                             $dis = "";
@@ -216,29 +220,55 @@ $sesLvl = $_SESSION['role'];
                                             $ukuran = $row['ukuran'];
                                             $detailukuran = $row['id_detailukuran'];
                                             $stok = $row['stok'];
+                                            $gambar = $row['gambar'];
                                     ?>
                                     <tbody>
                                         <tr>
-                                            <td><?php echo $no; ?></td>
+                                            <td><?php echo $no++; ?></td>
                                             <td><?php echo $varian; ?></td>
                                             <td><?php echo $ukuran; ?></td>
                                             <td><?php echo $detailukuran; ?></td>
                                             <td><?php echo $stok; ?></td>
+                                            <td><?php echo "<center><img src='../images/product/$gambar' width='160' height='160'></center>" ?></td>
                                             <td>
                                                 <a href="barangedit.php?id=<?php echo $row['id_barang']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
                                                 </a>
-                                                <a href="barangdelete.php?id=<?php echo $row['id_barang']; ?>">
+                                                <a href="barangdelete.php?id=<?php echo $row['id_barang'];?>" onclick="return confirm('Do you want to delete these records? This action cannot be undone. You will be unable to recover any data.');">
                                                     <input type="button" class="btn btn-danger" value="Delete" name="delete" <?php echo $dis; ?>>
                                                 </a>
                                             </td>
                                         </tr>
                                         <?php 
-                                            $no++;
-                                        }
+                                            }
                                         ?>
                                     </tbody>
                                 </table>
+                                <nav>
+                                <ul class="pagination table-bordered">
+                                    <li>
+                                        <a class="waves-effect" <?php if($halaman > 1){ echo "href='baranghome.php?halaman=$previous'";} ?> >
+                                            PREVIOUS
+                                            <!-- <i class="material-icons">chevron_left</i> -->
+                                        </a>
+                                    </li>
+
+                                    <?php 
+                                        for($x=1; $x<=$total_halaman; $x++){
+                                    ?>
+                                        <li><a class="waves-effect" href="baranghome.php?halaman=<?php echo $x ?>"><?php echo $x; ?><!-- &nbsp;&nbsp;| --></a></li>
+                                    <?php
+                                        }
+                                    ?>  
+
+                                    <li>
+                                        <a class="waves-effect" <?php if($halaman < $total_halaman){ echo "href='baranghome.php?halaman=$next'";} ?>>
+                                            NEXT
+                                            <!-- <i class="material-icons">chevron_right</i> -->
+                                        </a>
+                                    </li>
+                                </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
@@ -246,8 +276,33 @@ $sesLvl = $_SESSION['role'];
                 </div>
             </section>
         <!-- #Content -->
+        
+        <!-- Modal -->
+        <div class="modal fade" id="modallogout" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <!-- konten modal-->
+                    <div class="modal-content">
+                        <!-- heading modal -->
+                        <div class="modal-header" style="background: #FFCCCC;">
+                            <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
+                                >
+                        </div>
+                        <!-- body modal -->
+                        <div class="modal-body">
+                            <h5>Are you sure you want to logout?</h5>
+                        </div>
+                        <!-- footer modal -->
+                        <div class="modal-footer">
+                            <a href="../logout.php">
+                                <button type="button" class="btn btn-danger waves-effect">Yes</button>
+                                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancel</button>
+                            </a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- #Modal -->
 
-    <!-- Jquery Core Js -->
     <!-- Jquery Core Js -->
     <script src="../plugins/jquery/jquery.min.js"></script>
 
@@ -264,18 +319,16 @@ $sesLvl = $_SESSION['role'];
     <script src="../plugins/node-waves/waves.js"></script>
 
     <!-- Jquery DataTable Plugin Js -->
-    <script src="../plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
     <!-- Custom Js -->
     <script src="../js/admin.js"></script>
+    <script src="../js/pages/ui/modals.js"></script>
     <script src="../js/pages/tables/jquery-datatable.js"></script>
 
     <!-- Demo Js -->

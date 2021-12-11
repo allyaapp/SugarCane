@@ -4,24 +4,39 @@ require ("../koneksi.php");
 
 session_start();
 
-if(!isset($_SESSION['id'])){
-    $_SESSION['msg'] = 'Anda harus login untuk mengakses halaman ini!';
-    header('Location: login.php');
-}
+//session
 $sesID = $_SESSION['id'];
 $sesName = $_SESSION['username'];
 $sesLvl = $_SESSION['role'];
+$sesImg = $_SESSION['foto'];
+$path = '../images/admin/';
 
 if(isset ($_POST['create']) ){
+    //mengambil data dari form.
     $id = $_POST['id_barang'];
     $varian = $_POST['varian'];
     $ukuran = $_POST['ukuran'];
     $id_detailukuran = $_POST['id_detailukuran'];
     $stok = $_POST['stok'];
 
-    $query = "INSERT INTO barang VALUES ('', '$varian', '$ukuran', '$id_detailukuran', '$stok')";
+    //proses upload file.
+    $gambar = $_FILES['gambar']['name'];
+    $tmp = $_FILES['gambar']['tmp_name'];
+
+    move_uploaded_file($tmp, "../images/product/".$gambar);
+
+    //query create data
+    $query = "INSERT INTO barang VALUES ('', '$varian', '$ukuran', '$id_detailukuran', '$stok', '$gambar')";
     $result = mysqli_query($koneksi, $query);
-    header('Location: baranghome.php');
+
+    //percabangan jika !$result, maka muncul alert tidak dapat disimpan.
+    if (!$result) {
+        echo "<script> alert('The record couldn't be saved!') </script>";
+        echo "<script> location='barangcreate.php'; </script>";
+    } else {
+    //else, akan dibawa ke halaman barang home
+        header('Location: baranghome.php');
+    }
 }
   
 ?>
@@ -35,7 +50,7 @@ if(isset ($_POST['create']) ){
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Create Product's Data | SUGAR CANE</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -91,15 +106,13 @@ if(isset ($_POST['create']) ){
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
                             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
-                            <img class="img-profile rounded-circle" src="../images/user.png" width="70%" style="border-radius: 50px;">
+                            <img class="img-profile rounded-circle" src="<?php echo $path.$sesImg; ?>" width="36" height="36" style="border-radius: 50px; margin-top: -5px; margin-left: 5px;" >
                         </a>
+
                         <!-- Dropdown - User Information -->
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="../logout.php"><i class="material-icons">input</i>Sign Out</a></li>
-                            <div class="dropdown-divider"></div>
+                            <li><a href="../editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                         </ul>
                     </li>
                     <!-- #User Info -->
@@ -119,35 +132,35 @@ if(isset ($_POST['create']) ){
                         <li>
                             <a href="../index.php">
                                 <i class="material-icons">home</i>
-                                <span>Dashboard</span>
+                                <span>DASHBOARD</span>
                             </a>
                         </li>
                         <li>
                             <a href="../admin/adminhome.php">
                                 <i class="material-icons">account_box</i>
-                                <span>Admins</span>
+                                <span>ADMIN</span>
                             </a>
                         </li>
                         <li>
                             <a href="../user/userhome.php">
                                 <i class="material-icons">person</i>
-                                <span>Users</span>
+                                <span>USER</span>
                             </a>
                         </li>
                         <li class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">library_books</i>
-                                <span>Data Barang</span>
+                                <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
                                 <li class="active">
                                     <a href="baranghome.php">
-                                        <span>Barang</span>
+                                        <span>PRODUCT</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="detailbarang.php">
-                                        <span>Detail Ukuran</span>
+                                    <a href="detailukuran.php">
+                                        <span>SIZE DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -155,17 +168,17 @@ if(isset ($_POST['create']) ){
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">assessment</i>
-                                <span>Transaksi</span>
+                                <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
                                     <a href="../transaksi/transaksihome.php">
-                                        <span>Transaksi</span>
+                                        <span>TRANSACTION</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="../transaksi/detailtransaksi.php">
-                                        <span>Detail Transaksi</span>
+                                        <span>TRANSACTION DETAILS</span>
                                     </a>
                                 </li>
                             </ul>
@@ -174,12 +187,12 @@ if(isset ($_POST['create']) ){
                 </ul>
             </div>
             <!-- #Menu -->
+
             <!-- Footer -->
             <div class="legal">
-                <a href="../logout.php">
-                    <button type="button" class="btn bg-red btn-block waves-effect">LOGOUT</button>
-                </a>
+                <button type="button" data-color="red" class="btn bg-red btn-block waves-effect m-r-20" data-toggle="modal" data-target="#modallogout">LOGOUT</button>
             </div>
+
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->
@@ -195,14 +208,7 @@ if(isset ($_POST['create']) ){
                             <h2>CREATE DATA</h2>
                         </div>
                         <div class="body">
-                            <form id="form_validation" action="barangcreate.php" method="POST">
-                                <!-- 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="id_barang">
-                                        <label class="form-label">ID</label>
-                                    </div>
-                                </div> -->
+                            <form id="form_validation" action="barangcreate.php" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label class="form-label">Varian Rasa</label><br>
 
@@ -254,7 +260,13 @@ if(isset ($_POST['create']) ){
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="stok" required>
-                                        <label class="form-label">Stok</label>
+                                        <label class="form-label" style="color: black;">Stok</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                        <label class="form-label">Foto</label>
+                                    <div class="form-line">
+                                        <input type="file" class="form-control" name="gambar" required>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="create">CREATE</button>
@@ -270,7 +282,32 @@ if(isset ($_POST['create']) ){
             </section>
         <!-- #Content -->
 
-    <!-- Jquery Core Js -->
+        <!-- Modal -->
+        <div class="modal fade" id="modallogout" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <!-- konten modal-->
+                    <div class="modal-content">
+                        <!-- heading modal -->
+                        <div class="modal-header" style="background: #FFCCCC;">
+                            <h3 class="modal-title" id="modallogoutLabel">Confirm Logout</h3
+                                >
+                        </div>
+                        <!-- body modal -->
+                        <div class="modal-body">
+                            <h5>Are you sure you want to logout?</h5>
+                        </div>
+                        <!-- footer modal -->
+                        <div class="modal-footer">
+                            <a href="../logout.php">
+                                <button type="button" class="btn btn-danger waves-effect">Yes</button>
+                                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancel</button>
+                            </a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- #Modal -->
+
     <!-- Jquery Core Js -->
     <script src="../plugins/jquery/jquery.min.js"></script>
 
@@ -297,6 +334,7 @@ if(isset ($_POST['create']) ){
 
     <!-- Custom Js -->
     <script src="../js/admin.js"></script>
+    <script src="../js/pages/ui/modals.js"></script>
     <script src="../js/pages/tables/jquery-datatable.js"></script>
 
     <!-- Demo Js -->

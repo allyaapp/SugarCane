@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Sugarcane</string>
+    <string name="welcome_to">
+        WELCOME TO
+    </string>
+    <string name="forgot_pass">
+
+Forgot Password?
+</string>
+</resources>
