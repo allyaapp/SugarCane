@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#ECEBE6"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    tools:context=".Activity.HomeActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -50,9 +51,9 @@
                     android:id="@+id/MainUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="60dp"
                     android:layout_marginTop="32dp"
-                    android:text="Hi Hani"
+                    android:text="Hani"
                     android:textColor="#329560"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -67,11 +68,11 @@
                     android:text="Cari dan Pesan"
                     android:textColor="#000000"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="@+id/MainUsername"
+                    app:layout_constraintStart_toStartOf="@+id/textView5"
                     app:layout_constraintTop_toBottomOf="@+id/MainUsername" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/profil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="40dp"
@@ -207,6 +208,19 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="34dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Hi"
+                    android:textColor="#329560"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
@@ -246,7 +260,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/home1"/>
+                        app:srcCompat="@drawable/home2"/>
 
                     <TextView
                         android:id="@+id/textView16"
@@ -265,8 +279,8 @@
                     android:orientation="vertical"
                     android:visibility="visible">
 
-                    <ImageView
-                        android:id="@+id/imageView17"
+                    <ImageButton
+                        android:id="@+id/btn_prof"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -336,12 +350,11 @@
                     android:layout_weight="0.2"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/imageView20"
+                    <ImageButton
+                        android:id="@+id/btn_logout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClick="ActionLogout"
                         app:srcCompat="@drawable/logout" />
 
                     <TextView

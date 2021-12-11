@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:icon="@drawable/logo_asli"
         android:label="Sugarcane"
@@ -11,13 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SUGARCANE">
         <activity
-            android:name=".History"
-            android:exported="true" />
-        <activity
             android:name=".profile"
             android:exported="true" />
         <activity
-            android:name=".login.Login"
+            android:name=".RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

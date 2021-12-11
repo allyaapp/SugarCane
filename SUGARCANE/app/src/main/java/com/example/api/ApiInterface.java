@@ -6,6 +6,7 @@ import com.example.sugarcane.register.Register;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -19,8 +20,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("register.php")
     Call<Register> registerResponse(
-            String username, @Field("email") String email,
+            @Field("username") String username,
             @Field("password") String password,
-            @Field("name") String name,
-            String kelas);
+            @Field("fullname") String fullname,
+            @Field("no_hp") String nohp);
 }
