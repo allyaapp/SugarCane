@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ecebe6"
-    tools:context=".Activity.CartActivity">
+    android:background="#ecebe6">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -244,7 +243,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/home2"/>
+                        app:srcCompat="@drawable/home1"/>
 
                     <TextView
                         android:id="@+id/textView16"

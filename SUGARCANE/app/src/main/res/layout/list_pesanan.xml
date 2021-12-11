@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:textColor="@color/black"
-                    android:text="Pesanan telah diterima"/>
+                    android:text="coklat small 1"/>
 
             </LinearLayout>
 
