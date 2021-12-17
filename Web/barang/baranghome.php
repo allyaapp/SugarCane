@@ -229,7 +229,7 @@ $path = '../images/admin/';
                                             <td><?php echo $ukuran; ?></td>
                                             <td><?php echo $detailukuran; ?></td>
                                             <td><?php echo $stok; ?></td>
-                                            <td><?php echo "<center><img src='../images/product/$gambar' width='160' height='160'></center>" ?></td>
+                                            <td><?php echo "<center><img src='../images/product/$gambar' width='90' height='90'></center>" ?></td>
                                             <td>
                                                 <a href="barangedit.php?id=<?php echo $row['id_barang']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
