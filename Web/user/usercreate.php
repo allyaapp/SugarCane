@@ -14,7 +14,7 @@ $path = '../images/admin/';
 if(isset ($_POST['create']) ){
     //mengambil data dari form.
     $id = $_POST['id_user'];
-    $nama = $_POST['fullname'];
+    $nama = $_POST['nama'];
     $alamat = $_POST['alamat'];
     $no_hp = $_POST['no_hp'];
     $username = $_POST['username'];
@@ -208,7 +208,7 @@ if(isset ($_POST['create']) ){
                             <form id="form_validation" action="usercreate.php" method="POST" enctype="multipart/form-data">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="fullname" required>
+                                        <input type="text" class="form-control" name="nama" required>
                                         <label class="form-label">Nama Lengkap</label>
                                     </div>
                                 </div>

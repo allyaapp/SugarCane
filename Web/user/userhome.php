@@ -215,10 +215,11 @@ $path = '../images/admin/';
 
                                         while ($row = mysqli_fetch_array($result)){
                                             $id = $row['id_user'];
-                                            $nama = $row['fullname'];
+                                            $nama = $row['nama'];
                                             $alamat = $row['alamat'];
                                             $no_hp = $row['no_hp'];
                                             $username = $row['username'];
+                                            $password = $row['password'];
                                             $foto = $row['foto'];
                                     ?>
                                     <tbody>
@@ -228,7 +229,8 @@ $path = '../images/admin/';
                                             <td><?php echo $alamat; ?></td>
                                             <td><?php echo $no_hp; ?></td>
                                             <td><?php echo $username; ?></td>
-                                            <td><?php echo "<center><img src='../images/user/$foto' width='120' height='120'></center>" ?></td>
+                                            <td><?php echo $password; ?></td>
+                                            <td><?php echo "<center><img src='../images/user/$foto' width='60' height='60'></center>" ?></td>
                                             <td>
                                                 <a href="useredit.php?id=<?php echo $row['id_user']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
