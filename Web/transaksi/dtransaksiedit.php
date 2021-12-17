@@ -156,7 +156,7 @@ $path = '../images/admin/';
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../barang/detailbarang.php">
+                                    <a href="../barang/detailukuran.php">
                                         <span>SIZE DETAILS</span>
                                     </a>
                                 </li>

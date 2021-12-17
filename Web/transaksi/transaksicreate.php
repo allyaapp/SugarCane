@@ -19,7 +19,7 @@ if(isset ($_POST['create']) ){
     $totalharga = $_POST['totalharga'];
 
     //query create 
-    $query = "INSERT INTO transaksi VALUES ('', '$id_user', '$tgltransaksi', '$totalharga')";
+    $query = "INSERT INTO transaksi VALUES ('', 'id_admin', '$id_user', '$tgltransaksi', '$totalharga')";
     $result = mysqli_query($koneksi, $query);
     header('Location: transaksihome.php');
 }
@@ -192,6 +192,12 @@ if(isset ($_POST['create']) ){
                         </div>
                         <div class="body">
                             <form id="form_validation" method="POST">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="id_admin" required>
+                                        <label class="form-label">ID Admin</label>
+                                    </div>
+                                </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" class="form-control" name="id_user" required>
