@@ -117,7 +117,7 @@ $path = 'images/admin/';
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">library_books</i>
+                                <i class="material-icons">icecream</i>
                                 <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
@@ -135,7 +135,7 @@ $path = 'images/admin/';
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">assessment</i>
+                                <i class="material-icons">equalizer</i>
                                 <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
@@ -150,6 +150,12 @@ $path = 'images/admin/';
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="report/report.php">
+                                <i class="material-icons">library_books</i>
+                                <span>REPORT</span>
+                            </a>
                         </li>
                     </div>
                 </ul>
@@ -280,10 +286,8 @@ $path = 'images/admin/';
                                 <div role="tabpanel" class="tab-pane fade in active" id="about">
                                     <b>Home Content</b>
                                     <p>
-                                        Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                        Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                        pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                        sadipscing mel.
+                                        Sugar Cane Ice Cream merupakan es krim dengan bahan-bahan alami. Baik itu perisa yang digunakan maupun pemanis yang dibuat, salah satunya perisa yang digunakan yakni terbuat dari buah-buhan. Untuk pemanisnya dibuat dengan menggunakan sari tebu. <br>
+                                        Pertama tebu diambil airnya dengan menggunakan mesin pemeras tebu. Kemudian untuk perisa pilih buah yang akan digunakan sebagai perasa alami, misalnya buah strawberry. Setelah itu kita dapat mencampur bahan-bahan utama tersebut ke dalam bubuk es krim. Juga selain itu, bisa dengan cara dipotong menjadi tiga bagian dan dijadikan topping di dalam es krim tersebut.
                                     </p>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="chocolate">
