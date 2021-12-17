@@ -234,7 +234,7 @@ $path = '../images/admin/';
                                             <td><?php echo $alamat; ?></td>
                                             <td><?php echo $username; ?></td>
                                             <td><?php echo $role; ?></td>
-                                            <td><?php echo "<center><img src='../images/admin/$foto' width='120' height='120'></center>" ?></td>
+                                            <td><?php echo "<center><img src='../images/admin/$foto' width='60' height='60'></center>" ?></td>
                                             <td>
                                                 <a href="adminedit.php?id=<?php echo $row['id_admin']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
