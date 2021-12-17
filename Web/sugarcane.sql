@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2021 at 04:38 PM
+-- Generation Time: Dec 17, 2021 at 01:24 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -45,9 +45,9 @@ CREATE TABLE `admindetail` (
 
 INSERT INTO `admindetail` (`id_admin`, `fullname`, `no_hp`, `alamat`, `username`, `password`, `role`, `foto`) VALUES
 (1, 'Vasyilla Kautsar', '089665566774', 'Jember', 'syilla', 'syilla', 1, 'girl.png'),
-(2, 'Sofia Ufaira', '082638192739', 'Jember', 'sofia', 'asdfghjkl', 2, 'boy.png'),
-(3, 'Naila Khansa', '081273819287', 'Jember', 'naila', 'naila', 2, 'profile.png'),
-(4, 'Dzikri Abyudzaky', '086787975678', 'Jember', 'dzikri', 'asdfghjk', 2, 'man.png');
+(2, 'Ajeng Tias', '081234152671', 'Bondowoso', 'ajeng', 'ajeng', 1, 'boy.png'),
+(3, 'Dzikri Abyudzaky', '082638192739', 'Jember', 'dzikri', 'dzikri', 2, 'man.png'),
+(21, 'Naila Khansa', '082638192739', 'Bintoro', 'naila', 'naila', 2, 'profile.png');
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ INSERT INTO `admindetail` (`id_admin`, `fullname`, `no_hp`, `alamat`, `username`
 
 CREATE TABLE `barang` (
   `id_barang` int(11) NOT NULL,
-  `varian` enum('Chocolate','Strawberry','VanillaOreo') NOT NULL,
+  `varian` enum('Chocolate','Strawberry','VanillaOreo','') NOT NULL,
   `ukuran` enum('Mini','Jumbo') NOT NULL,
   `id_detailukuran` varchar(2) NOT NULL,
   `stok` int(3) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `varian`, `ukuran`, `id_detailukuran`, `stok`, `gambar`) VALUES
-(1, 'Chocolate', 'Mini', 'M1', 100, 'chocolate-mini.jpg'),
+(1, 'Chocolate', 'Mini', 'M1', 99, 'chocolate-mini.jpg'),
 (2, 'Chocolate', 'Mini', 'M2', 75, 'chocolate-mini.jpg'),
 (12, 'Chocolate', 'Mini', 'M3', 21, 'chocolate-mini.jpg'),
 (13, 'Chocolate', 'Jumbo', 'J1', 42, 'chocolate-jumbo.jpg'),
@@ -141,7 +141,7 @@ CREATE TABLE `pesanan` (
 INSERT INTO `pesanan` (`id_pesanan`, `id_transaksi`, `id_barang`, `qty`, `subharga`) VALUES
 (9, 5, 12, 3, 15000),
 (10, 5, 26, 1, 30000),
-(11, 5, 22, 2, 16000);
+(11, 5, 27, 2, 16000);
 
 -- --------------------------------------------------------
 
@@ -151,8 +151,10 @@ INSERT INTO `pesanan` (`id_pesanan`, `id_transaksi`, `id_barang`, `qty`, `subhar
 
 CREATE TABLE `transaksi` (
   `id_transaksi` int(11) NOT NULL,
+  `id_admin` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tgltransaksi` date NOT NULL,
+  `ongkir` int(5) NOT NULL,
   `totalharga` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -160,8 +162,8 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `tgltransaksi`, `totalharga`) VALUES
-(5, 23, '2021-12-08', 61000);
+INSERT INTO `transaksi` (`id_transaksi`, `id_admin`, `id_user`, `tgltransaksi`, `ongkir`, `totalharga`) VALUES
+(5, 3, 23, '2021-12-08', 10000, 71000);
 
 -- --------------------------------------------------------
 
@@ -171,7 +173,7 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `tgltransaksi`, `totalharga`
 
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
-  `fullname` varchar(40) NOT NULL,
+  `nama` varchar(40) NOT NULL,
   `alamat` text NOT NULL,
   `no_hp` varchar(13) NOT NULL,
   `username` varchar(10) NOT NULL,
@@ -183,11 +185,11 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `fullname`, `alamat`, `no_hp`, `username`, `password`, `foto`) VALUES
-(17, 'Hani', 'Jember', '081273819287', 'hani', 'hani', 'girl-wavy.png'),
-(22, 'Allya', 'Jember', '082937182938', 'allya', 'allya', 'girl-curly.png'),
+INSERT INTO `user` (`id_user`, `nama`, `alamat`, `no_hp`, `username`, `password`, `foto`) VALUES
+(17, 'Hani ', 'Jember', '081273819287', 'hani', 'hani', 'girl-wavy.png'),
+(22, 'Allya', 'Jember', '082937182938', 'allya', 'allya', 'girl-green.png'),
 (23, 'Dwiki', 'Jember', '082937182938', 'dwiki', 'dwiki', 'boy-blue.png'),
-(25, 'Ajeng', 'Bondowoso', '081273819282', 'ajeng', 'ajeng', 'girl-green.png');
+(25, 'Dzikri', 'Jember', '081273819282', 'dzikri', 'dzikri', 'boy-green.png');
 
 --
 -- Indexes for dumped tables
@@ -226,7 +228,8 @@ ALTER TABLE `pesanan`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_admin` (`id_admin`);
 
 --
 -- Indexes for table `user`
@@ -242,31 +245,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admindetail`
 --
 ALTER TABLE `admindetail`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
@@ -289,7 +292,8 @@ ALTER TABLE `pesanan`
 -- Constraints for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
+  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_admin`) REFERENCES `admindetail` (`id_admin`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
