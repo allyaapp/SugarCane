@@ -118,7 +118,7 @@ $path = '../images/admin/';
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">library_books</i>
+                                <i class="material-icons">icecream</i>
                                 <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
@@ -136,7 +136,7 @@ $path = '../images/admin/';
                         </li>
                         <li class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">assessment</i>
+                                <i class="material-icons">equalizer</i>
                                 <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
@@ -151,6 +151,12 @@ $path = '../images/admin/';
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="../report/report.php">
+                                <i class="material-icons">library_books</i>
+                                <span>REPORT</span>
+                            </a>
                         </li>
                     </div>
                 </ul>
@@ -194,6 +200,7 @@ $path = '../images/admin/';
                                             <th>Tanggal Transaksi</th>
                                             <th>Ongkos Kirim</th>
                                             <th>Total Harga</th>
+                                            <th>Status</th>
                                             <th>Menu</th>
                                         </tr>
                                     </thead>
@@ -209,7 +216,7 @@ $path = '../images/admin/';
                                         $jumlah_data = mysqli_num_rows($data);
                                         $total_halaman = ceil($jumlah_data / $batas);
                                         
-                                        $query = "SELECT transaksi.id_transaksi, transaksi.id_admin, admindetail.id_admin, admindetail.fullname, transaksi.id_user, user.id_user, user.nama, transaksi.tgltransaksi, transaksi.ongkir, transaksi.totalharga FROM transaksi 
+                                        $query = "SELECT transaksi.id_transaksi, transaksi.id_admin, admindetail.id_admin, admindetail.fullname, transaksi.id_user, user.id_user, user.nama, transaksi.tgltransaksi, transaksi.ongkir, transaksi.totalharga, transaksi.status FROM transaksi 
                                             INNER JOIN user ON transaksi.id_user = user.id_user 
                                             INNER JOIN admindetail ON transaksi.id_admin = admindetail.id_admin 
                                             limit $halaman_awal, $batas";
@@ -235,6 +242,7 @@ $path = '../images/admin/';
                                             <td><?php echo $row['tgltransaksi']; ?></td>
                                             <td><?php echo $row['ongkir']; ?></td>
                                             <td><?php echo $row['totalharga']; ?></td>
+                                            <td><?php echo $row['status']; ?></td>
                                             <td>
                                                 <a href="transaksiedit.php?id=<?php echo $row['id_transaksi']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
