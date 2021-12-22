@@ -113,7 +113,7 @@ $path = '../images/admin/';
                         </li>
                         <li class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">library_books</i>
+                                <i class="material-icons">icecream</i>
                                 <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
@@ -131,7 +131,7 @@ $path = '../images/admin/';
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">assessment</i>
+                                <i class="material-icons">equalizer</i>
                                 <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
@@ -146,6 +146,12 @@ $path = '../images/admin/';
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="../report/report.php">
+                                <i class="material-icons">library_books</i>
+                                <span>REPORT</span>
+                            </a>
                         </li>
                     </div>
                 </ul>
@@ -229,7 +235,7 @@ $path = '../images/admin/';
                                             <td><?php echo $ukuran; ?></td>
                                             <td><?php echo $detailukuran; ?></td>
                                             <td><?php echo $stok; ?></td>
-                                            <td><?php echo "<center><img src='../images/product/$gambar' width='160' height='160'></center>" ?></td>
+                                            <td><?php echo "<center><img src='../images/product/$gambar' width='90' height='90'></center>" ?></td>
                                             <td>
                                                 <a href="barangedit.php?id=<?php echo $row['id_barang']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>

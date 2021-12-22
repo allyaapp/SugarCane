@@ -19,7 +19,7 @@ $no = 1;
 //menampilkan data pada database menggunakan array
 while ($row = mysqli_fetch_array($result)){
     $id = $row['id_user'];
-    $nama = $row['fullname'];
+    $nama = $row['nama'];
     $alamat = $row['alamat'];
     $no_hp = $row['no_hp'];
     $username = $row['username'];
@@ -131,7 +131,7 @@ while ($row = mysqli_fetch_array($result)){
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">library_books</i>
+                                <i class="material-icons">icecream</i>
                                 <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
@@ -149,7 +149,7 @@ while ($row = mysqli_fetch_array($result)){
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">assessment</i>
+                                <i class="material-icons">equalizer</i>
                                 <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
@@ -164,6 +164,12 @@ while ($row = mysqli_fetch_array($result)){
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="../report/report.php">
+                                <i class="material-icons">library_books</i>
+                                <span>REPORT</span>
+                            </a>
                         </li>
                     </div>
                 </ul>
@@ -199,7 +205,7 @@ while ($row = mysqli_fetch_array($result)){
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="fullname" value="<?php echo $nama;?>" required>
+                                        <input type="text" class="form-control" name="nama" value="<?php echo $nama;?>" required>
                                         <label class="form-label">Nama User</label>
                                     </div>
                                 </div>
@@ -233,7 +239,8 @@ while ($row = mysqli_fetch_array($result)){
                                         <div>
                                             <img src="<?php echo "../images/user/$foto"; ?>" width="64" height="64" alt="avatar">
                                         </div>
-                                        <input type="file" name="foto" class="form-control" value="<?php echo $foto;?>">
+                                        <input type="file" name="foto" class="form-control">
+                                        <input type="hidden" name="fotolm" class="form-control" value="<?php echo $foto;?>">
                                     </div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="update">UPDATE</button>
@@ -311,15 +318,17 @@ while ($row = mysqli_fetch_array($result)){
 <?php 
     }
 ?>
+
 <?php 
 if(isset($_POST['update']) ){
 //mengambil data dari form
     $id = $_POST['id_user'];
-    $nama = $_POST['fullname'];
+    $nama = $_POST['nama'];
     $alamat = $_POST['alamat'];
     $no_hp = $_POST['no_hp'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $fotolama = $_POST['fotolm'];
 
     //proses upload file
     $foto = $_FILES['foto']['name'];
@@ -329,10 +338,18 @@ if(isset($_POST['update']) ){
     //percabangan, jika file foto kosong, maka update semua field kecuali foto.
     //karena kita tidak akan mengubah foto yang sudah ada.
         if ($foto == '') {
-            $result = mysqli_query($koneksi, "UPDATE user SET fullname='$nama', no_hp='$no_hp', alamat='$alamat', username='$username', password='$password' WHERE id_user='$id'");
+            $result = mysqli_query($koneksi, "UPDATE user SET nama='$nama', no_hp='$no_hp', alamat='$alamat', username='$username', password='$password' WHERE id_user='$id'");
+            header('Location: userhome.php');
         } else {
         //percabangan, jika field foto ada filenya, maka update semua field termasuk foto.
-            $result = mysqli_query($koneksi, "UPDATE user SET fullname='$nama', no_hp='$no_hp', alamat='$alamat', username='$username', password='$password', foto='$foto' WHERE id_user='$id'");
+            //menghapus file foto sebelumnya
+            unlink('../images/user/'.$fotolama);
+
+            //menyimpan file foto di dalam folder images
+            move_uploaded_file($tmp, "../images/user/".$pict);
+
+            //query mengedit data, include field foto
+            $result = mysqli_query($koneksi, "UPDATE user SET nama='$nama', no_hp='$no_hp', alamat='$alamat', username='$username', password='$password', foto='$foto' WHERE id_user='$id'");
             header('Location: userhome.php');
         }
 }

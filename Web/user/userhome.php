@@ -112,7 +112,7 @@ $path = '../images/admin/';
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">library_books</i>
+                                <i class="material-icons">icecream</i>
                                 <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
@@ -130,7 +130,7 @@ $path = '../images/admin/';
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">assessment</i>
+                                <i class="material-icons">equalizer</i>
                                 <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
@@ -145,6 +145,12 @@ $path = '../images/admin/';
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="../report/report.php">
+                                <i class="material-icons">library_books</i>
+                                <span>REPORT</span>
+                            </a>
                         </li>
                     </div>
                 </ul>
@@ -215,10 +221,11 @@ $path = '../images/admin/';
 
                                         while ($row = mysqli_fetch_array($result)){
                                             $id = $row['id_user'];
-                                            $nama = $row['fullname'];
+                                            $nama = $row['nama'];
                                             $alamat = $row['alamat'];
                                             $no_hp = $row['no_hp'];
                                             $username = $row['username'];
+                                            $password = $row['password'];
                                             $foto = $row['foto'];
                                     ?>
                                     <tbody>
@@ -228,7 +235,8 @@ $path = '../images/admin/';
                                             <td><?php echo $alamat; ?></td>
                                             <td><?php echo $no_hp; ?></td>
                                             <td><?php echo $username; ?></td>
-                                            <td><?php echo "<center><img src='../images/user/$foto' width='120' height='120'></center>" ?></td>
+                                            <td><?php echo $password; ?></td>
+                                            <td><?php echo "<center><img src='../images/user/$foto' width='60' height='60'></center>" ?></td>
                                             <td>
                                                 <a href="useredit.php?id=<?php echo $row['id_user']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>

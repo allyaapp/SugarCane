@@ -97,7 +97,7 @@ $path = '../images/admin/';
                         <!-- Dropdown - User Information -->
                         <ul class="dropdown-menu" style="border-radius: 5px;">
                             <div class="dropdown-divider"></div>
-                            <li><a href="../editprofile.php;"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="../editprofile.php"><i class="material-icons">person</i>Profile</a></li>
                             <div class="dropdown-divider"></div>
                         </ul>
                     </li>
@@ -135,7 +135,7 @@ $path = '../images/admin/';
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">library_books</i>
+                                <i class="material-icons">icecream</i>
                                 <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
@@ -153,7 +153,7 @@ $path = '../images/admin/';
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">assessment</i>
+                                <i class="material-icons">equalizer</i>
                                 <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
@@ -168,6 +168,12 @@ $path = '../images/admin/';
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="../report/report.php">
+                                <i class="material-icons">library_books</i>
+                                <span>REPORT</span>
+                            </a>
                         </li>
                     </div>
                 </ul>
@@ -243,7 +249,8 @@ $path = '../images/admin/';
                                         <div>
                                             <img src="<?php echo $path.$foto;?>" width="64" height="64" alt="avatar">
                                         </div>
-                                        <input type="file" class="form-control" name="foto" value="<?php echo $foto;?>">
+                                        <input type="file" class="form-control" name="foto">
+                                        <input type="hidden" class="form-control" name="fotolm" value="<?php echo $foto;?>">
                                     </div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="update">UPDATE</button>
@@ -332,11 +339,11 @@ $path = '../images/admin/';
         $username = $_POST['username'];
         $password = $_POST['password'];
         $role = $_POST['role'];
+        $pictlama = $_POST['fotolm'];
 
         //proses upload file
         $pict = $_FILES['foto']['name'];
         $tmp = $_FILES['foto']['tmp_name'];
-        move_uploaded_file($tmp, "../images/admin/".$pict);
 
         //percabangan, jika file foto kosong, maka update semua field kecuali foto.
         //karena kita tidak akan mengubah foto yang sudah ada.
@@ -345,6 +352,13 @@ $path = '../images/admin/';
             header('Location: adminhome.php');
         } else {
             //percabangan, jika field foto ada filenya, maka update semua field termasuk foto.
+            //menghapus file foto sebelumnya
+            unlink('../images/admin/'.$pictlama);
+
+            //menyimpan file foto di dalam folder images
+            move_uploaded_file($tmp, "../images/admin/".$pict);
+
+            //query mengedit data, include field foto.
             $result = mysqli_query($koneksi, "UPDATE admindetail SET fullname='$nama', no_hp='$no_hp', alamat='$alamat', username='$username', password='$password', role='$role', foto='$pict' WHERE id_admin='$id'");
             header('Location: adminhome.php');
         }

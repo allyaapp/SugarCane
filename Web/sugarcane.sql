@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2021 at 04:38 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Dec 19, 2021 at 05:29 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -73,13 +72,13 @@ INSERT INTO `barang` (`id_barang`, `varian`, `ukuran`, `id_detailukuran`, `stok`
 (2, 'Chocolate', 'Mini', 'M2', 75, 'chocolate-mini.jpg'),
 (12, 'Chocolate', 'Mini', 'M3', 21, 'chocolate-mini.jpg'),
 (13, 'Chocolate', 'Jumbo', 'J1', 42, 'chocolate-jumbo.jpg'),
-(14, 'Chocolate', 'Jumbo', 'J2', 82, 'chocolate-jumbo.jpg'),
+(14, 'Chocolate', 'Jumbo', 'J2', 81, 'chocolate-jumbo.jpg'),
 (16, 'Chocolate', 'Jumbo', 'J3', 82, 'chocolate-jumbo.jpg'),
 (17, 'Chocolate', 'Jumbo', 'J4', 26, 'chocolate-jumbo.jpg'),
 (18, 'Chocolate', 'Jumbo', 'J5', 21, 'chocolate-jumbo.jpg'),
 (19, 'Strawberry', 'Mini', 'M1', 21, 'strawberry-mini.jpg'),
 (20, 'Strawberry', 'Mini', 'M2', 42, 'strawberry-mini.jpg'),
-(21, 'Strawberry', 'Mini', 'M3', 82, 'strawberry-mini.jpg'),
+(21, 'Strawberry', 'Mini', 'M3', 81, 'strawberry-mini.jpg'),
 (22, 'Strawberry', 'Jumbo', 'J1', 88, 'strawberry-jumbo.jpg'),
 (23, 'Strawberry', 'Jumbo', 'J2', 86, 'strawberry-jumbo.jpg'),
 (24, 'Strawberry', 'Jumbo', 'J3', 56, 'strawberry-jumbo.jpg'),
@@ -141,7 +140,15 @@ CREATE TABLE `pesanan` (
 INSERT INTO `pesanan` (`id_pesanan`, `id_transaksi`, `id_barang`, `qty`, `subharga`) VALUES
 (9, 5, 12, 3, 15000),
 (10, 5, 26, 1, 30000),
-(11, 5, 22, 2, 16000);
+(11, 5, 22, 2, 16000),
+(12, 6, 14, 1, 10000),
+(13, 6, 21, 2, 10000),
+(14, 15, 21, 1, 5000),
+(15, 15, 14, 1, 10000),
+(16, 16, 21, 1, 5000),
+(17, 16, 14, 1, 10000),
+(18, 17, 21, 1, 5000),
+(19, 17, 14, 1, 10000);
 
 -- --------------------------------------------------------
 
@@ -151,17 +158,24 @@ INSERT INTO `pesanan` (`id_pesanan`, `id_transaksi`, `id_barang`, `qty`, `subhar
 
 CREATE TABLE `transaksi` (
   `id_transaksi` int(11) NOT NULL,
+  `id_admin` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tgltransaksi` date NOT NULL,
-  `totalharga` int(7) NOT NULL
+  `ongkir` double(11,2) NOT NULL,
+  `totalharga` int(7) NOT NULL,
+  `status` enum('proses','diterima') NOT NULL DEFAULT 'proses'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `tgltransaksi`, `totalharga`) VALUES
-(5, 23, '2021-12-08', 61000);
+INSERT INTO `transaksi` (`id_transaksi`, `id_admin`, `id_user`, `tgltransaksi`, `ongkir`, `totalharga`, `status`) VALUES
+(5, 3, 23, '2021-12-08', 0.00, 61000, 'proses'),
+(6, 4, 26, '2021-12-14', 10000.00, 20000, 'proses'),
+(15, 4, 23, '2021-12-15', 93300.00, 15000, 'proses'),
+(16, 3, 26, '2021-12-15', 93300.00, 15000, 'proses'),
+(17, 4, 26, '2021-12-15', 93300.00, 15000, 'proses');
 
 -- --------------------------------------------------------
 
@@ -171,23 +185,26 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `tgltransaksi`, `totalharga`
 
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
-  `fullname` varchar(40) NOT NULL,
-  `alamat` text NOT NULL,
+  `nama` varchar(40) NOT NULL,
+  `alamat` text DEFAULT NULL,
   `no_hp` varchar(13) NOT NULL,
   `username` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL,
-  `foto` varchar(100) NOT NULL
+  `foto` varchar(100) DEFAULT NULL,
+  `longitude` double DEFAULT NULL,
+  `latitude` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `fullname`, `alamat`, `no_hp`, `username`, `password`, `foto`) VALUES
-(17, 'Hani', 'Jember', '081273819287', 'hani', 'hani', 'girl-wavy.png'),
-(22, 'Allya', 'Jember', '082937182938', 'allya', 'allya', 'girl-curly.png'),
-(23, 'Dwiki', 'Jember', '082937182938', 'dwiki', 'dwiki', 'boy-blue.png'),
-(25, 'Ajeng', 'Bondowoso', '081273819282', 'ajeng', 'ajeng', 'girl-green.png');
+INSERT INTO `user` (`id_user`, `nama`, `alamat`, `no_hp`, `username`, `password`, `foto`, `longitude`, `latitude`) VALUES
+(17, 'Hani', 'Jember', '081273819287', 'hani', 'hani', 'girl-wavy.png', 7.892588, 113.8802083),
+(22, 'Allya', 'Jember', '082937182938', 'allya', 'allya', 'girl-curly.png', 0, 0),
+(23, 'Dwiki', 'Jember', '082937182938', 'dwiki', 'dwiki', 'boy-blue.png', 0, 0),
+(25, 'Ajeng', 'Bondowoso', '081273819282', 'ajeng', 'ajeng', 'girl-green.png', 0, 0),
+(26, 'Oong', 'Bondowoso', '085331053300', 'oong', 'oong', 'user2.png', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -226,7 +243,8 @@ ALTER TABLE `pesanan`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_admin` (`id_admin`);
 
 --
 -- Indexes for table `user`
@@ -248,25 +266,25 @@ ALTER TABLE `admindetail`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
@@ -289,7 +307,8 @@ ALTER TABLE `pesanan`
 -- Constraints for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
+  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_admin`) REFERENCES `admindetail` (`id_admin`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

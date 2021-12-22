@@ -13,13 +13,15 @@ $path = '../images/admin/';
 
     if(isset($_POST['update']) ){
         //mengambil nilai dari form
-        $id_transaksi = $_POST['id_transaksi'];
+        $id_transaksi = $_POST['id_transaksi'];       
+        $id_admin = $_POST['id_admin'];
         $id_user = $_POST['id_user'];
         $tgltransaksi = $_POST['tgltransaksi'];
+        $ongkir = $_POST['ongkir'];
         $totalharga = $_POST['totalharga'];
 
         //query edit data
-        $query = "UPDATE transaksi SET id_user='$id_user', tgltransaksi='$tgltransaksi', totalharga='$totalharga' WHERE id_transaksi='$id_transaksi'";
+        $query = "UPDATE transaksi SET id_admin='$id_admin', id_user='$id_user', tgltransaksi='$tgltransaksi', ongkir='$ongkir', totalharga='$totalharga' WHERE id_transaksi='$id_transaksi'";
         $result = mysqli_query($koneksi, $query);
         header('Location: transaksihome.php');
     }
@@ -31,8 +33,10 @@ $path = '../images/admin/';
     //menampilkan data pada database menggunakan array
     while ($row = mysqli_fetch_array($result)){
         $id_transaksi = $row['id_transaksi'];
+        $id_admin = $row['id_admin'];
         $id_user = $row['id_user'];
         $tgltransaksi = $row['tgltransaksi'];
+        $ongkir = $row['ongkir'];
         $totalharga = $row['totalharga'];    
 
 ?>
@@ -140,7 +144,7 @@ $path = '../images/admin/';
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">library_books</i>
+                                <i class="material-icons">icecream</i>
                                 <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
@@ -150,7 +154,7 @@ $path = '../images/admin/';
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../barang/detailbarang.php">
+                                    <a href="../barang/detailukuran.php">
                                         <span>SIZE DETAILS</span>
                                     </a>
                                 </li>
@@ -158,7 +162,7 @@ $path = '../images/admin/';
                         </li>
                         <li class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">assessment</i>
+                                <i class="material-icons">equalizer</i>
                                 <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
@@ -173,6 +177,12 @@ $path = '../images/admin/';
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="../report/report.php">
+                                <i class="material-icons">library_books</i>
+                                <span>REPORT</span>
+                            </a>
                         </li>
                     </div>
                 </ul>
@@ -202,13 +212,19 @@ $path = '../images/admin/';
                             <form id="form_validation" method="POST" action="transaksiedit.php">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="id_transaksi" value="<?php echo $id_transaksi;?>" required>
+                                        <input type="number" class="form-control" name="id_transaksi" value="<?php echo $id_transaksi;?>" required>
                                         <label class="form-label">ID Transaksi</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="id_user" value="<?php echo $id_user;?>" required>
+                                        <input type="number" class="form-control" name="id_admin" value="<?php echo $id_admin;?>" required>
+                                        <label class="form-label">ID Admin</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="id_user" value="<?php echo $id_user;?>" required>
                                         <label class="form-label">ID User</label>
                                     </div>
                                 </div>
@@ -220,7 +236,13 @@ $path = '../images/admin/';
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="totalharga" value="<?php echo $totalharga;?>" required>
+                                        <input type="number" class="form-control" name="ongkir" value="<?php echo $ongkir;?>" required>
+                                        <label class="form-label">Ongkir</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="totalharga" value="<?php echo $totalharga;?>" required>
                                         <label class="form-label">Total Harga</label>
                                     </div>
                                 </div>

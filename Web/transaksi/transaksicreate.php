@@ -19,7 +19,7 @@ if(isset ($_POST['create']) ){
     $totalharga = $_POST['totalharga'];
 
     //query create 
-    $query = "INSERT INTO transaksi VALUES ('', '$id_user', '$tgltransaksi', '$totalharga')";
+    $query = "INSERT INTO transaksi VALUES ('', 'id_admin', '$id_user', '$tgltransaksi', '$totalharga')";
     $result = mysqli_query($koneksi, $query);
     header('Location: transaksihome.php');
 }
@@ -132,7 +132,7 @@ if(isset ($_POST['create']) ){
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">library_books</i>
+                                <i class="material-icons">icecream</i>
                                 <span>PRODUCT</span>
                             </a>
                             <ul class="ml-menu">
@@ -150,7 +150,7 @@ if(isset ($_POST['create']) ){
                         </li>
                         <li  class="active">
                             <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">assessment</i>
+                                <i class="material-icons">equalizer</i>
                                 <span>TRANSACTION</span>
                             </a>
                             <ul class="ml-menu">
@@ -165,6 +165,12 @@ if(isset ($_POST['create']) ){
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="../report/report.php">
+                                <i class="material-icons">library_books</i>
+                                <span>REPORT</span>
+                            </a>
                         </li>
                     </div>
                 </ul>
@@ -192,6 +198,12 @@ if(isset ($_POST['create']) ){
                         </div>
                         <div class="body">
                             <form id="form_validation" method="POST">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="id_admin" required>
+                                        <label class="form-label">ID Admin</label>
+                                    </div>
+                                </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" class="form-control" name="id_user" required>
