@@ -22,33 +22,33 @@ public class Login  {
     @SerializedName("data")
     private LoginData loginData;
 
-    @SerializedName("message")
-    private String message;
+    @SerializedName("error")
+    private Boolean error;
 
-    @SerializedName("status")
-    private boolean status;
+    @SerializedName("error_msg")
+    private String error_msg;
 
-    public void setLoginData(LoginData loginData){
-        this.loginData = loginData;
-    }
-
-    public LoginData getLoginData(){
+    public LoginData getLoginData() {
         return loginData;
     }
 
-    public void setMessage(String message){
-        this.message = message;
+    public void setLoginData(LoginData loginData) {
+        this.loginData = loginData;
     }
 
-    public String getMessage(){
-        return message;
+    public Boolean getError() {
+        return error;
     }
 
-    public void setStatus(boolean status){
-        this.status = status;
+    public void setError(Boolean error) {
+        this.error = error;
     }
 
-    public boolean isStatus(){
-        return status;
+    public String getError_msg() {
+        return error_msg;
+    }
+
+    public void setError_msg(String error_msg) {
+        this.error_msg = error_msg;
     }
 }

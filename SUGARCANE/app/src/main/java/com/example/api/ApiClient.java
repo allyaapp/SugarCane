@@ -7,8 +7,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.56.1/sugarcane/";
 
+    public static final String DOMAIN_URL = "http://192.168.56.1/sugarcane/";
+    public static final String BASE_URL = DOMAIN_URL+"api/";
     private static Retrofit retrofit;
 
     public static Retrofit getClient() {

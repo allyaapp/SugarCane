@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".History">
+    tools:context=".HistoryActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_history"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#1FA444"
+        app:title="Riwayat"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <RelativeLayout
@@ -18,12 +19,13 @@
         android:layout_height="match_parent"
         android:layout_below="@id/tb_history">
 
-        <ListView
-            android:id="@+id/list_pesanan"
+        <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/list_pesanan"
+            android:id="@+id/rv_pesanan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
-            android:dividerHeight="0dp"/>
+            android:dividerHeight="0dp" />
     </RelativeLayout>
 
     <TextView

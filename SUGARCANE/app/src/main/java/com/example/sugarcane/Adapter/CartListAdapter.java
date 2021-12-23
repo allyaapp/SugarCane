@@ -1,6 +1,7 @@
 package com.example.sugarcane.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import com.example.cart.Cart;
 import com.example.sugarcane.Domain.FoodDomain;
 import com.example.sugarcane.Helper.ManagementCart;
 import com.example.sugarcane.Interface.ChangeNumberItemsListener;
 import com.example.sugarcane.R;
+import com.example.sugarcane.items.Items;
 
 import java.util.ArrayList;
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> {
-    ArrayList<FoodDomain> listFoodSelected;
-    private ManagementCart managementCart;
+    ArrayList<Cart> listFoodSelected;
+    private final ManagementCart managementCart;
     ChangeNumberItemsListener changeNumberItemsListener;
 
-    public CartListAdapter(ArrayList<FoodDomain> listFoodSelected, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
+    public CartListAdapter(ArrayList<Cart> listFoodSelected, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
         this.listFoodSelected = listFoodSelected;
         managementCart = new ManagementCart(context);
         this.changeNumberItemsListener = changeNumberItemsListener;
@@ -40,18 +43,13 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(listFoodSelected.get(position).getTitle());
-        holder.feeEachItem.setText("$" + listFoodSelected.get(position).getFee());
-        holder.totalEachItem.setText("$" + Math.round((listFoodSelected.get(position).getNumberInCart() * listFoodSelected.get(position).getFee())));
-        holder.num.setText(String.valueOf(listFoodSelected.get(position).getNumberInCart()));
-
-
-        int drawableReourceId = holder.itemView.getContext().getResources()
-                .getIdentifier(listFoodSelected.get(position).getPic(), "drawable",
-                        holder.itemView.getContext().getPackageName());
+        holder.title.setText(listFoodSelected.get(position).getVarian());
+        holder.feeEachItem.setText("Rp." + listFoodSelected.get(position).getHarga());
+        holder.totalEachItem.setText("Rp." + Math.round((Float.parseFloat(listFoodSelected.get(position).getQty()) * Float.parseFloat(listFoodSelected.get(position).getHarga()))));
+        holder.num.setText(String.valueOf(listFoodSelected.get(position).getQty()));
 
         Glide.with(holder.itemView.getContext())
-                .load(drawableReourceId)
+                .load(listFoodSelected.get(position).getImg_url())
                 .into(holder.pic);
 
         holder.plusItem.setOnClickListener(v -> managementCart.plusNumberFood(listFoodSelected, position, () -> {

@@ -3,6 +3,7 @@ package com.example.sugarcane;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnSignUp);
         tvLogin = findViewById(R.id.tvLogin);
 
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String password = editTextPassword.getText().toString();
         final String confPass = editConfirmPassword.getText().toString();
         final String fullname = editFullname.getText().toString();
-        final String nohp = editPhone.getText().toString();
+        final String no_hp = editPhone.getText().toString();
 
         if (TextUtils.isEmpty(username)) {
             editTextUsername.setError("Please enter username");
@@ -96,34 +99,40 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if (TextUtils.isEmpty(nohp)) {
+        if (TextUtils.isEmpty(no_hp)) {
             editPhone.setError("Please enter your phone number");
             editPhone.requestFocus();
             return;
         }
 
-        register(username, password, fullname, nohp);
+        register(username, password, fullname, no_hp);
     }
 
-    private void register(String username, String password, String fullname, String nohp) {
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Register> call = apiInterface.registerResponse(username, password, fullname, nohp);
+    private void register(String username, String password, String fullname, String no_hp) {
+        Call<Register> call = apiInterface.registerResponse(username, password, fullname, no_hp);
         call.enqueue(new Callback<Register>() {
             @Override
             public void onResponse(Call<Register> call, Response<Register> response) {
-                if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
-                    Toast.makeText(RegisterActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(RegisterActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                try {
+                    if(response.body() != null && response.isSuccessful() && !response.body().getError()){
+                        Toast.makeText(RegisterActivity.this, "Berhasil mendaftar", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "Gagal mendaftarkan akun", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e) {
+                    Log.e("prosesRegister", e.getMessage());
+                    Toast.makeText(RegisterActivity.this, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Register> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("prosesRegister", t.getMessage());
+                Toast.makeText(RegisterActivity.this, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
             }
         });
     }

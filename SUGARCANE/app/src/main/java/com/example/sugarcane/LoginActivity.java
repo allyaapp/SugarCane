@@ -2,6 +2,7 @@ package com.example.sugarcane;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import com.example.api.ApiClient;
 import com.example.api.ApiInterface;
 import com.example.sugarcane.login.Login;
 import com.example.sugarcane.login.LoginData;
+import com.example.sugarcane.register.Register;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +42,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         tvRegister = findViewById(R.id.tvRegister);
         tvRegister.setOnClickListener(this);
+
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
     }
 
     @Override
@@ -59,34 +64,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void login(String username, String password) {
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<Login> loginCall = apiInterface.loginResponse(username, password);
         loginCall.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
-                if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
+                try {
+                    if(response.body() != null && response.isSuccessful() && response.body().getError().equals(false)){
 
-                    //untuk menyimpan sesi
-                    sessionManager = new SessionManager(LoginActivity.this);
-                    LoginData loginData = response.body().getLoginData();
-                    sessionManager.createLoginSession(loginData);
+                        //untuk menyimpan sesi
+                        sessionManager = new SessionManager(LoginActivity.this);
+                        LoginData loginData = response.body().getLoginData();
+                        sessionManager.createLoginSession(loginData);
 
-                    //untuk pindah
-                    Toast.makeText(LoginActivity.this, response.body().getLoginData().getName(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        //untuk pindah
+                        Toast.makeText(LoginActivity.this, "Berhasil Login / Masuk", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Log.e("prosesLogin", e.getMessage());
+                    Toast.makeText(LoginActivity.this, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
                 }
+
 
             }
 
             @Override
             public void onFailure(Call<Login> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("prosesLogin", t.getMessage());
+                Toast.makeText(LoginActivity.this, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
             }
         });
 
 
     }
+
 }

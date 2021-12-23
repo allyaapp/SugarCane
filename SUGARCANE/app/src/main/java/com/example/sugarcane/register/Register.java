@@ -18,33 +18,33 @@ public class Register  {
     @SerializedName("data")
     private RegisterData registerData;
 
-    @SerializedName("message")
-    private String message;
+    @SerializedName("error")
+    private Boolean error;
 
-    @SerializedName("status")
-    private boolean status;
+    @SerializedName("error_msg")
+    private String error_msg;
 
-    public void setRegisterData(RegisterData registerData){
-        this.registerData = registerData;
-    }
-
-    public RegisterData getRegisterData(){
+    public RegisterData getRegisterData() {
         return registerData;
     }
 
-    public void setMessage(String message){
-        this.message = message;
+    public void setRegisterData(RegisterData registerData) {
+        this.registerData = registerData;
     }
 
-    public String getMessage(){
-        return message;
+    public Boolean getError() {
+        return error;
     }
 
-    public void setStatus(boolean status){
-        this.status = status;
+    public void setError(Boolean error) {
+        this.error = error;
     }
 
-    public boolean isStatus(){
-        return status;
+    public String getError_msg() {
+        return error_msg;
+    }
+
+    public void setError_msg(String error_msg) {
+        this.error_msg = error_msg;
     }
 }

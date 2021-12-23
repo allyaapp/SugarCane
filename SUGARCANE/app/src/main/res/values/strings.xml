@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Sugarcane</string>
-    <string name="welcome_to">
-        WELCOME TO
-    </string>
-    <string name="forgot_pass">
-
-Forgot Password?
-</string>
+    <string name="welcome_to">WELCOME TO</string>
+    <string name="forgot_pass">Forgot Password?</string>
+    <string name="access_token">pk.eyJ1IjoibWFwYm94am9vIiwiYSI6ImNrdTJqbmQ1MzFkemwycHBjdjZxNzd0enMifQ.1YoUlKrKk9pyCm6fREGQZg</string>
+    <string name="start_navigation">Start Navigation</string>
+    <string name="user_location_permission_explanation">This app needs location permissions to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
+    <string name="map_key" translatable="false">AIzaSyAVpjPDnWBM4VaVnd07PLpct3BRym4dEZs-48TDaJYjTP3vbjo</string>
 </resources>
