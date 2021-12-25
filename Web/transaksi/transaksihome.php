@@ -245,7 +245,7 @@ $path = '../images/admin/';
                                             <td><?php echo $row['status']; ?></td>
                                             <td>
                                                 <a href="transaksiedit.php?id=<?php echo $row['id_transaksi']; ?>">
-                                                    <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
+                                                    <input type="button" class="btn btn-info" value="Edit" name="edit">
                                                 </a>
                                                 <a href="transaksidelete.php?id=<?php echo $row['id_transaksi'];?>" onclick="return confirm('Do you want to delete these records? This action cannot be undone. You will be unable to recover any data.');">
                                                     <input type="button" class="btn btn-danger" value="Delete" name="delete" <?php echo $dis; ?>>

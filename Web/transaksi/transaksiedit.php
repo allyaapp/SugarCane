@@ -19,9 +19,10 @@ $path = '../images/admin/';
         $tgltransaksi = $_POST['tgltransaksi'];
         $ongkir = $_POST['ongkir'];
         $totalharga = $_POST['totalharga'];
+        $status =$_POST['status'];
 
         //query edit data
-        $query = "UPDATE transaksi SET id_admin='$id_admin', id_user='$id_user', tgltransaksi='$tgltransaksi', ongkir='$ongkir', totalharga='$totalharga' WHERE id_transaksi='$id_transaksi'";
+        $query = "UPDATE transaksi SET id_admin='$id_admin', id_user='$id_user', tgltransaksi='$tgltransaksi', ongkir='$ongkir', totalharga='$totalharga', status='$status' WHERE id_transaksi='$id_transaksi'";
         $result = mysqli_query($koneksi, $query);
         header('Location: transaksihome.php');
     }
@@ -37,7 +38,8 @@ $path = '../images/admin/';
         $id_user = $row['id_user'];
         $tgltransaksi = $row['tgltransaksi'];
         $ongkir = $row['ongkir'];
-        $totalharga = $row['totalharga'];    
+        $totalharga = $row['totalharga']; 
+        $status = $row['status'];   
 
 ?>
 
@@ -245,6 +247,15 @@ $path = '../images/admin/';
                                         <input type="number" class="form-control" name="totalharga" value="<?php echo $totalharga;?>" required>
                                         <label class="form-label">Total Harga</label>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Status</label><br>
+
+                                    <input type="radio" name="status" id="proses" class="with-gap radio-col-light-green" value="proses"<?php if($status=='Proses') echo 'checked'?>>
+                                    <label for="proses" class="m-l-20">Proses</label><br>
+
+                                    <input type="radio" name="status" id="diterima" class="with-gap radio-col-light-green" value="diterima"<?php if($status=='Diterima') echo 'checked'?>>
+                                    <label for="diterima" class="m-l-20">Diterima</label>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="update">UPDATE</button>
                                 <a href="transaksihome.php">

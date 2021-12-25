@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2021 at 05:29 AM
+-- Generation Time: Dec 23, 2021 at 01:56 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -130,7 +130,7 @@ CREATE TABLE `pesanan` (
   `id_transaksi` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
-  `subharga` int(11) NOT NULL
+  `subharga` double(11,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -138,17 +138,17 @@ CREATE TABLE `pesanan` (
 --
 
 INSERT INTO `pesanan` (`id_pesanan`, `id_transaksi`, `id_barang`, `qty`, `subharga`) VALUES
-(9, 5, 12, 3, 15000),
-(10, 5, 26, 1, 30000),
-(11, 5, 22, 2, 16000),
-(12, 6, 14, 1, 10000),
-(13, 6, 21, 2, 10000),
-(14, 15, 21, 1, 5000),
-(15, 15, 14, 1, 10000),
-(16, 16, 21, 1, 5000),
-(17, 16, 14, 1, 10000),
-(18, 17, 21, 1, 5000),
-(19, 17, 14, 1, 10000);
+(9, 5, 12, 3, 15000.00),
+(10, 5, 26, 1, 30000.00),
+(11, 5, 22, 2, 16000.00),
+(12, 6, 14, 1, 10000.00),
+(13, 6, 21, 2, 10000.00),
+(14, 15, 21, 1, 5000.00),
+(15, 15, 14, 1, 10000.00),
+(16, 16, 21, 1, 5000.00),
+(17, 16, 14, 1, 10000.00),
+(18, 17, 21, 1, 5000.00),
+(19, 17, 14, 1, 10000.00);
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,7 @@ CREATE TABLE `transaksi` (
   `tgltransaksi` date NOT NULL,
   `ongkir` double(11,2) NOT NULL,
   `totalharga` int(7) NOT NULL,
-  `status` enum('proses','diterima') NOT NULL DEFAULT 'proses'
+  `status` enum('Proses','Diterima') NOT NULL DEFAULT 'Proses'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -171,11 +171,11 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_admin`, `id_user`, `tgltransaksi`, `ongkir`, `totalharga`, `status`) VALUES
-(5, 3, 23, '2021-12-08', 0.00, 61000, 'proses'),
-(6, 4, 26, '2021-12-14', 10000.00, 20000, 'proses'),
-(15, 4, 23, '2021-12-15', 93300.00, 15000, 'proses'),
-(16, 3, 26, '2021-12-15', 93300.00, 15000, 'proses'),
-(17, 4, 26, '2021-12-15', 93300.00, 15000, 'proses');
+(5, 3, 23, '2021-12-08', 0.00, 61000, 'Diterima'),
+(6, 4, 26, '2021-12-14', 10000.00, 20000, 'Proses'),
+(15, 4, 23, '2021-12-15', 93300.00, 15000, 'Proses'),
+(16, 3, 26, '2021-12-15', 93300.00, 15000, 'Diterima'),
+(17, 4, 26, '2021-12-15', 93300.00, 15000, 'Proses');
 
 -- --------------------------------------------------------
 
@@ -191,8 +191,8 @@ CREATE TABLE `user` (
   `username` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL,
   `foto` varchar(100) DEFAULT NULL,
-  `longitude` double DEFAULT NULL,
-  `latitude` double DEFAULT NULL
+  `longitude` varchar(50) DEFAULT NULL,
+  `latitude` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -200,11 +200,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `alamat`, `no_hp`, `username`, `password`, `foto`, `longitude`, `latitude`) VALUES
-(17, 'Hani', 'Jember', '081273819287', 'hani', 'hani', 'girl-wavy.png', 7.892588, 113.8802083),
-(22, 'Allya', 'Jember', '082937182938', 'allya', 'allya', 'girl-curly.png', 0, 0),
-(23, 'Dwiki', 'Jember', '082937182938', 'dwiki', 'dwiki', 'boy-blue.png', 0, 0),
-(25, 'Ajeng', 'Bondowoso', '081273819282', 'ajeng', 'ajeng', 'girl-green.png', 0, 0),
-(26, 'Oong', 'Bondowoso', '085331053300', 'oong', 'oong', 'user2.png', 0, 0);
+(17, 'Hani', 'Jember', '081273819287', 'hani', 'hani', 'girl-wavy.png', '7.892588', '113.8802083'),
+(22, 'Allya', 'Jember', '082937182938', 'allya', 'allya', 'girl-curly.png', '0', '0'),
+(23, 'Dwiki', 'Jember', '082937182938', 'dwiki', 'dwiki', 'boy-blue.png', '0', '0'),
+(25, 'Ajeng', 'Bondowoso', '081273819282', 'ajeng', 'ajeng', 'girl-green.png', '0', '0'),
+(26, 'Oong', 'Bondowoso', '085331053300', 'oong', 'oong', 'user2.png', '0', '0');
 
 --
 -- Indexes for dumped tables

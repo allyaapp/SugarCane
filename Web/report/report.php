@@ -187,7 +187,7 @@ $path = '../images/admin/';
                         </div>
                         <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
                             <a href="user.php">
-                                <button type="button" class="btn btn-block btn-lg btn-success waves-effect">
+                                <button type="button" class="btn btn-block btn-lg bg-cyan waves-effect">
                                     <i class="material-icons">person</i>
                                     <span>USER</span>
                                 </button>
@@ -203,7 +203,7 @@ $path = '../images/admin/';
                         </div>
                         <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
                             <a href="transaksi.php">
-                                <button type="button" class="btn btn-block btn-lg btn-info waves-effect">
+                                <button type="button" class="btn btn-block btn-lg bg-light-green waves-effect">
                                     <i class="material-icons">equalizer</i>
                                     <span>TRANSACTION</span>
                                 </button>

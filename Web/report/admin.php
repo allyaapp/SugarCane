@@ -13,8 +13,8 @@ $pdf->Ln(1); // Line break
 
 $pdf->SetFont('Arial', 'B', 10); //font, style, size
 $pdf->SetFont(''); //menghapus bold
-$pdf->Cell(0, 5, 'Alamat : Jl.XXXXXX No.00, Bondowoso', '0', '1', 'C', false);
-$pdf->Cell(0, 5, 'No. HP : 080000000000', '0', '1', 'C', false);
+$pdf->Cell(0, 5, 'Alamat : Jln. Mastrip Perum Villa Kembang Asri Blok AB-04 Sukowiryo, Bondowoso', '0', '1', 'C', false);
+$pdf->Cell(0, 5, 'No. HP : 085781203604', '0', '1', 'C', false);
 $pdf->Ln(3); // Line break
 $pdf->Cell(275, 0.6, '', '0', '1', 'C', true);
 $pdf->Ln(7); // Line break
