@@ -5,6 +5,21 @@
       <map>
         <entry key="..\:/Users/HANI/AndroidStudioProjects/sugarcane-android/app/src/main/res/layout/activity_cart.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/HANI/AndroidStudioProjects/sugarcane-android/app/src/main/res/layout/home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/activity_history.xml" value="0.10778985507246377" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/activity_items.xml" value="0.10778985507246377" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/activity_map.xml" value="0.10778985507246377" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/activity_show_detail.xml" value="0.10778985507246377" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/activity_welcome.xml" value="0.10778985507246377" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/home.xml" value="0.17" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/list_pesanan.xml" value="0.10778985507246377" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/pop_up.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/register.xml" value="0.10778985507246377" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/row_product.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/viewholder_cart.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/viewholder_category.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/viewholder_item.xml" value="0.10778985507246377" />
+        <entry key="..\:/Users/dwiki/Downloads/SUGARCANE/app/src/main/res/layout/viewholder_recommended.xml" value="0.17192982456140352" />
       </map>
     </option>
   </component>

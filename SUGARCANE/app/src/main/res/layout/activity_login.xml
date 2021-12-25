@@ -103,22 +103,6 @@
         app:layout_constraintVertical_bias="0.186"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="132dp"
-        android:layout_height="27dp"
-        android:fontFamily="@font/roboto_bold"
-        android:onClick="actionForgotPassword"
-        android:text="Forgot Password?"
-        android:textColor="#012600"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.79"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.712" />
-
     <Button
         android:id="@+id/btnLogin"
         style="@style/Widget.AppCompat.Button.Colored"
