@@ -27,8 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity{
-    ImageButton btnProfil, btnLogout;
-    ImageView btnRiwayat;
+    ImageView btnRiwayat, btnProfil, btnLogout;
     LinearLayout btnHome;
     TextView etUsername, tvGoItems;
     EditText editSearch;
