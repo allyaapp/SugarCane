@@ -1,14 +1,15 @@
 <?php
 require ('koneksi.php');
 
+//memulai sesi
 session_start();
 
+//mengecek apakah variable terisi, dan tidak null
 if(isset($_POST['submit']) ){ 
     $user = $_POST['username'];
     $pass =$_POST['password'];
 
     if(!empty(trim($user)) && !empty(trim($pass))){
-
         $query = "SELECT * FROM admindetail WHERE username = '$user'";
         $result = mysqli_query($koneksi, $query);
         $num = mysqli_num_rows($result);
@@ -93,10 +94,9 @@ if(isset($_POST['submit']) ){
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-8 p-t-5">
-                            <a href="forgot-password.php"><u>Forgot Password?</u></a>
+                        <div class="col-xs-2 p-t-5">
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-8">
                             <button class="btn btn-block bg-green waves-effect" type="submit" name="submit">LOG IN</button>
                         </div>
                     </div>
