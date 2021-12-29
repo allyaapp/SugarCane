@@ -14,14 +14,26 @@ $path = '../images/admin/';
 if(isset ($_POST['create']) ){
     //mengambil nilai dari form.
     $id_transaksi = $_POST['id_transaksi'];
+    $id_admin = $_POST['id_admin'];
     $id_user = $_POST['id_user'];
     $tgltransaksi = $_POST['tgltransaksi'];
+    $ongkir = $_POST['ongkir'];
     $totalharga = $_POST['totalharga'];
+    $status = $_POST['status'];
 
     //query create 
-    $query = "INSERT INTO transaksi VALUES ('', 'id_admin', '$id_user', '$tgltransaksi', '$totalharga')";
+    $query = "INSERT INTO transaksi VALUES ('', '$id_admin', '$id_user', '$tgltransaksi', '$ongkir', '$totalharga', '$status')";
     $result = mysqli_query($koneksi, $query);
-    header('Location: transaksihome.php');
+    
+    //percabangan jika !$result, maka muncul alert tidak dapat disimpan.
+    if (!$result) {
+        echo "<script> alert('The record couldn't be saved!') </script>";
+        echo "<script> location='transaksicreate.php'; </script>";
+    } else {
+    //else, akan dibawa ke halaman barang home
+        echo "<script> alert('Succesfully saved!') </script>";
+        echo "<script> location='transaksihome.php'; </script>";
+    }
 }
   
 ?>
@@ -197,7 +209,7 @@ if(isset ($_POST['create']) ){
                             <h2>CREATE DATA</h2>
                         </div>
                         <div class="body">
-                            <form id="form_validation" method="POST">
+                            <form id="form_validation" action="transaksicreate.php" method="POST">
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" class="form-control" name="id_admin" required>
@@ -218,9 +230,24 @@ if(isset ($_POST['create']) ){
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
+                                        <input type="text" class="form-control" name="ongkir" required>
+                                        <label class="form-label">Ongkir</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
                                         <input type="number" class="form-control" name="totalharga" required>
                                         <label class="form-label">Total Harga</label>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Status Pengiriman</label><br>
+
+                                    <input type="radio" name="status" value="Proses" id="Proses" class="with-gap radio-col-light-green">
+                                    <label for="Proses" class="m-l-20">Proses</label><br>
+
+                                    <input type="radio" name="status" value="Diterima" id="Diterima" class="with-gap radio-col-light-green">
+                                    <label for="Diterima" class="m-l-20">Diterima</label><br>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit" name="create">CREATE</button>
                                 <a href="transaksihome.php">

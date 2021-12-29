@@ -27,7 +27,7 @@ if(isset ($_POST['create']) ){
     move_uploaded_file($tmp, "../images/user/".$foto);
 
     //query create data
-    $query = "INSERT INTO user VALUES ('', '$nama', '$alamat', '$no_hp', '$username', '$password', '$foto')";
+    $query = "INSERT INTO user VALUES ('', '$nama', '$alamat', '$no_hp', '$username', '$password', '$foto', '', '')";
     $result = mysqli_query($koneksi, $query);
 
     //percabangan jika !$result, maka muncul alert tidak dapat disimpan.
@@ -36,7 +36,8 @@ if(isset ($_POST['create']) ){
         echo "<script> location='usercreate.php'; </script>";
     } else {
     //else, akan dibawa ke halaman admin home
-        header('Location: userhome.php');
+        echo "<script> alert('Succesfully saved!') </script>";
+        echo "<script> location='userhome.php'; </script>";
     }
 }
   

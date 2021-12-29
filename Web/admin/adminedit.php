@@ -349,8 +349,9 @@ $path = '../images/admin/';
         //karena kita tidak akan mengubah foto yang sudah ada.
         if ($pict == '') {
             $result = mysqli_query($koneksi, "UPDATE admindetail SET fullname='$nama', no_hp='$no_hp', alamat='$alamat', username='$username', password='$password', role='$role' WHERE id_admin='$id'");
-            header('Location: adminhome.php');
-        } else {
+            echo "<script> alert('Succesfully saved!') </script>";
+            echo "<script> location='adminhome.php'; </script>";
+        } else if ($pict){
             //percabangan, jika field foto ada filenya, maka update semua field termasuk foto.
             //menghapus file foto sebelumnya
             unlink('../images/admin/'.$pictlama);
@@ -360,7 +361,11 @@ $path = '../images/admin/';
 
             //query mengedit data, include field foto.
             $result = mysqli_query($koneksi, "UPDATE admindetail SET fullname='$nama', no_hp='$no_hp', alamat='$alamat', username='$username', password='$password', role='$role', foto='$pict' WHERE id_admin='$id'");
-            header('Location: adminhome.php');
+            echo "<script> alert('Succesfully saved!') </script>";
+            echo "<script> location='adminhome.php'; </script>";
+        } else {
+            echo "<script> alert('The record couldn't be updated!') </script>";
+            echo "<script> location='adminedit.php'; </script>";
         }
     }
 ?>

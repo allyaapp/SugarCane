@@ -15,8 +15,8 @@ if(isset ($_POST['create']) ){
     //mengambil data dari form.
     $id = $_POST['id_admin'];
     $nama = $_POST['fullname'];
-    $no_hp = $_POST['no_hp'];
     $alamat = $_POST['alamat'];
+    $no_hp = $_POST['no_hp'];
     $username = $_POST['username'];
     $password = $_POST['password'];
     $role = $_POST['role'];
@@ -28,7 +28,7 @@ if(isset ($_POST['create']) ){
     move_uploaded_file($tmp, "../images/admin/".$foto);
 
     //query create data
-    $query = "INSERT INTO admindetail VALUES ('', '$nama', '$no_hp', '$alamat', '$username', '$password', '$role', '$foto')";
+    $query = "INSERT INTO admindetail VALUES ('', '$nama', '$alamat', '$no_hp', '$username', '$password', '$role', '$foto')";
     $result = mysqli_query($koneksi, $query);
 
     //percabangan jika !$result, maka muncul alert tidak dapat disimpan.
@@ -37,7 +37,8 @@ if(isset ($_POST['create']) ){
         echo "<script> location='admincreate.php'; </script>";
     } else {
     //else, akan dibawa ke halaman admin home
-        header('Location: adminhome.php');
+        echo "<script> alert('Succesfully saved!') </script>";
+        echo "<script> location='adminhome.php'; </script>";
     }
 }
   
@@ -224,14 +225,14 @@ if(isset ($_POST['create']) ){
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="no_hp" required>
-                                        <label class="form-label">No. HP</label>
+                                        <textarea name="alamat" cols="30" rows="5" class="form-control no-resize" required></textarea>
+                                        <label class="form-label">Alamat</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <textarea name="alamat" cols="30" rows="5" class="form-control no-resize" required></textarea>
-                                        <label class="form-label">Alamat</label>
+                                        <input type="text" class="form-control" name="no_hp" required>
+                                        <label class="form-label">No. HP</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">

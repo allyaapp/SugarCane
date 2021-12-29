@@ -20,7 +20,16 @@ if(isset ($_POST['create']) ){
     //query create
     $query = "INSERT INTO detailukuran VALUES ('$id', '$varian', '$harga')";
     $result = mysqli_query($koneksi, $query);
-    header('Location: detailukuran.php');
+    
+    //percabangan jika !$result, maka muncul alert tidak dapat disimpan.
+    if (!$result) {
+        echo "<script> alert('The record couldn't be saved!') </script>";
+        echo "<script> location='ukurancreate.php'; </script>";
+    } else {
+    //else, akan dibawa ke halaman barang home
+        echo "<script> alert('Succesfully saved!') </script>";
+        echo "<script> location='detailukuran.php'; </script>";
+    }
 }
   
 ?>

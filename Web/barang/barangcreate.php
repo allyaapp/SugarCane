@@ -35,7 +35,8 @@ if(isset ($_POST['create']) ){
         echo "<script> location='barangcreate.php'; </script>";
     } else {
     //else, akan dibawa ke halaman barang home
-        header('Location: baranghome.php');
+        echo "<script> alert('Succesfully saved!') </script>";
+        echo "<script> location='baranghome.php'; </script>";
     }
 }
   

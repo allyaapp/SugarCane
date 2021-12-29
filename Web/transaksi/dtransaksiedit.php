@@ -22,7 +22,16 @@ $path = '../images/admin/';
         //query edit data
         $query = "UPDATE pesanan SET id_pesanan='$id_pesanan', id_transaksi='$id_transaksi', id_barang='$id_barang', qty='$qty', subharga='$subharga' WHERE id_pesanan='$id_pesanan'";
         $result = mysqli_query($koneksi, $query);
-        header('Location: detailtransaksi.php');
+        
+        //percabangan jika !$result, maka muncul alert tidak dapat disimpan.
+        if (!$result) {
+            echo "<script> alert('The record couldn't be saved!') </script>";
+            echo "<script> location='dtransaksiedit.php'; </script>";
+        } else {
+        //else, akan dibawa ke halaman barang home
+            echo "<script> alert('Succesfully saved!') </script>";
+            echo "<script> location='detailtransaksi.php'; </script>";
+    }
     }
 
     $id = $_GET['id'];

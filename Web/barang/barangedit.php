@@ -361,11 +361,16 @@ if(isset($_POST['update']) ){
         //karena kita tidak akan mengubah foto yang sudah ada.
         if ($gambar == '') {
             $result = mysqli_query($koneksi, "UPDATE barang SET varian='$varian', ukuran='$ukuran', id_detailukuran='$id_detailukuran', stok='$stok' WHERE id_barang='$id'");
-            header('Location: baranghome.php');
-        } else {
+            echo "<script> alert('Succesfully saved!') </script>";
+            echo "<script> location='baranghome.php'; </script>";
+        } else if ($gambar) {
             //percabangan, jika field foto ada filenya, maka update semua field termasuk foto.
-            $result = mysqli_query($koneksi, "UPDATE barang SET varian='$varian', ukuran='$ukuran', id_detailukuran='$id_detailukuran', stok='$stok', gambar='$gambar' WHERE id_barang='$id'");
-            header('Location: baranghome.php');
+            $result = mysqli_query($koneksi, "UPDATE barang SET varian='$varian', ukuran='$ukuran', id_detailukuran='$id_detailukuran', stok='$stok', gambar='$gambar' WHERE id_barang='$id'");           
+            echo "<script> alert('Succesfully saved!') </script>";
+            echo "<script> location='baranghome.php'; </script>";
+        } else {
+            echo "<script> alert('The record couldn't be updated!') </script>";
+            echo "<script> location='barangedit.php'; </script>";
         }
         
     }

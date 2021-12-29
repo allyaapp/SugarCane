@@ -339,8 +339,9 @@ if(isset($_POST['update']) ){
     //karena kita tidak akan mengubah foto yang sudah ada.
         if ($foto == '') {
             $result = mysqli_query($koneksi, "UPDATE user SET nama='$nama', no_hp='$no_hp', alamat='$alamat', username='$username', password='$password' WHERE id_user='$id'");
-            header('Location: userhome.php');
-        } else {
+            echo "<script> alert('Succesfully saved!') </script>";
+            echo "<script> location='userhome.php'; </script>";
+        } else if ($foto) {
         //percabangan, jika field foto ada filenya, maka update semua field termasuk foto.
             //menghapus file foto sebelumnya
             unlink('../images/user/'.$fotolama);
@@ -350,7 +351,11 @@ if(isset($_POST['update']) ){
 
             //query mengedit data, include field foto
             $result = mysqli_query($koneksi, "UPDATE user SET nama='$nama', no_hp='$no_hp', alamat='$alamat', username='$username', password='$password', foto='$foto' WHERE id_user='$id'");
-            header('Location: userhome.php');
+            echo "<script> alert('Succesfully saved!') </script>";
+            echo "<script> location='userhome.php'; </script>";
+        } else {
+            echo "<script> alert('The record couldn't be updated!') </script>";
+            echo "<script> location='userhome.php'; </script>";
         }
 }
 

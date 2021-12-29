@@ -20,7 +20,15 @@ $path = '../images/admin/';
         //query edit data
         $query = "UPDATE detailukuran SET id_detailukuran='$id_du', varianukuran='$varian', harga='$harga' WHERE id_detailukuran='$id_du'";
         $result = mysqli_query($koneksi, $query);
-        header('Location: detailukuran.php');
+        
+        if (!$result) {
+            echo "<script> alert('The record couldn't be saved!') </script>";
+            echo "<script> location='ukurancreate.php'; </script>";
+        } else {
+        //else, akan dibawa ke halaman barang home
+            echo "<script> alert('Succesfully saved!') </script>";
+            echo "<script> location='detailukuran.php'; </script>";
+        }
     }
 
     $id = $_GET['id'];

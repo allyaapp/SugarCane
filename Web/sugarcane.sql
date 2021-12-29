@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2021 at 01:56 PM
+-- Generation Time: Dec 29, 2021 at 08:26 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -44,9 +44,9 @@ CREATE TABLE `admindetail` (
 
 INSERT INTO `admindetail` (`id_admin`, `fullname`, `no_hp`, `alamat`, `username`, `password`, `role`, `foto`) VALUES
 (1, 'Vasyilla Kautsar', '089665566774', 'Jember', 'syilla', 'syilla', 1, 'girl.png'),
-(2, 'Sofia Ufaira', '082638192739', 'Jember', 'sofia', 'asdfghjkl', 2, 'boy.png'),
-(3, 'Naila Khansa', '081273819287', 'Jember', 'naila', 'naila', 2, 'profile.png'),
-(4, 'Dzikri Abyudzaky', '086787975678', 'Jember', 'dzikri', 'asdfghjk', 2, 'man.png');
+(3, 'Naila Khansa', '081273819287', 'Bintoro', 'naila', 'naila', 2, 'profile.png'),
+(4, 'Dzikri Abyudzaky', '086787975678', 'Jember', 'dzikri', 'asdfghjk', 2, 'man.png'),
+(10, 'Ajeng Tias', '083423726272', 'Bondowoso', 'ajeng', 'ajeng', 1, 'boy.png');
 
 -- --------------------------------------------------------
 
@@ -68,30 +68,8 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `varian`, `ukuran`, `id_detailukuran`, `stok`, `gambar`) VALUES
-(1, 'Chocolate', 'Mini', 'M1', 100, 'chocolate-mini.jpg'),
-(2, 'Chocolate', 'Mini', 'M2', 75, 'chocolate-mini.jpg'),
-(12, 'Chocolate', 'Mini', 'M3', 21, 'chocolate-mini.jpg'),
-(13, 'Chocolate', 'Jumbo', 'J1', 42, 'chocolate-jumbo.jpg'),
-(14, 'Chocolate', 'Jumbo', 'J2', 81, 'chocolate-jumbo.jpg'),
-(16, 'Chocolate', 'Jumbo', 'J3', 82, 'chocolate-jumbo.jpg'),
-(17, 'Chocolate', 'Jumbo', 'J4', 26, 'chocolate-jumbo.jpg'),
-(18, 'Chocolate', 'Jumbo', 'J5', 21, 'chocolate-jumbo.jpg'),
-(19, 'Strawberry', 'Mini', 'M1', 21, 'strawberry-mini.jpg'),
-(20, 'Strawberry', 'Mini', 'M2', 42, 'strawberry-mini.jpg'),
-(21, 'Strawberry', 'Mini', 'M3', 81, 'strawberry-mini.jpg'),
-(22, 'Strawberry', 'Jumbo', 'J1', 88, 'strawberry-jumbo.jpg'),
-(23, 'Strawberry', 'Jumbo', 'J2', 86, 'strawberry-jumbo.jpg'),
-(24, 'Strawberry', 'Jumbo', 'J3', 56, 'strawberry-jumbo.jpg'),
-(25, 'Strawberry', 'Jumbo', 'J4', 46, 'strawberry-jumbo.jpg'),
-(26, 'Strawberry', 'Jumbo', 'J5', 98, 'strawberry-jumbo.jpg'),
-(27, 'VanillaOreo', 'Mini', 'M1', 78, 'vanillaoreo-mini.jpg'),
-(28, 'VanillaOreo', 'Mini', 'M2', 46, 'vanillaoreo-mini.jpg'),
-(29, 'VanillaOreo', 'Mini', 'M3', 86, 'vanillaoreo-mini.jpg'),
-(30, 'VanillaOreo', 'Jumbo', 'J1', 46, 'vanillaoreo-jumbo.jpg'),
-(31, 'VanillaOreo', 'Jumbo', 'J2', 46, 'vanillaoreo-jumbo.jpg'),
-(32, 'VanillaOreo', 'Jumbo', 'J3', 46, 'vanillaoreo-jumbo.jpg'),
-(33, 'VanillaOreo', 'Jumbo', 'J4', 88, 'vanillaoreo-jumbo.jpg'),
-(37, 'VanillaOreo', 'Jumbo', 'J5', 98, 'vanillaoreo-jumbo.jpg');
+(1, 'Chocolate', 'Mini', 'M1', 32, 'chocolate-mini.jpg'),
+(2, 'Strawberry', 'Mini', 'M3', 19, 'strawberry-mini.jpg');
 
 -- --------------------------------------------------------
 
@@ -138,17 +116,10 @@ CREATE TABLE `pesanan` (
 --
 
 INSERT INTO `pesanan` (`id_pesanan`, `id_transaksi`, `id_barang`, `qty`, `subharga`) VALUES
-(9, 5, 12, 3, 15000.00),
-(10, 5, 26, 1, 30000.00),
-(11, 5, 22, 2, 16000.00),
-(12, 6, 14, 1, 10000.00),
-(13, 6, 21, 2, 10000.00),
-(14, 15, 21, 1, 5000.00),
-(15, 15, 14, 1, 10000.00),
-(16, 16, 21, 1, 5000.00),
-(17, 16, 14, 1, 10000.00),
-(18, 17, 21, 1, 5000.00),
-(19, 17, 14, 1, 10000.00);
+(20, 1, 1, 3, 9000.00),
+(21, 2, 2, 1, 5000.00),
+(22, 2, 1, 1, 3000.00),
+(23, 3, 2, 4, 20000.00);
 
 -- --------------------------------------------------------
 
@@ -171,11 +142,9 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_admin`, `id_user`, `tgltransaksi`, `ongkir`, `totalharga`, `status`) VALUES
-(5, 3, 23, '2021-12-08', 0.00, 61000, 'Diterima'),
-(6, 4, 26, '2021-12-14', 10000.00, 20000, 'Proses'),
-(15, 4, 23, '2021-12-15', 93300.00, 15000, 'Proses'),
-(16, 3, 26, '2021-12-15', 93300.00, 15000, 'Diterima'),
-(17, 4, 26, '2021-12-15', 93300.00, 15000, 'Proses');
+(1, 3, 22, '2021-12-29', 9000.00, 18000, 'Diterima'),
+(2, 3, 23, '2021-12-29', 6000.00, 14000, 'Diterima'),
+(3, 4, 17, '2021-12-29', 12000.00, 38000, 'Proses');
 
 -- --------------------------------------------------------
 
@@ -202,9 +171,10 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `nama`, `alamat`, `no_hp`, `username`, `password`, `foto`, `longitude`, `latitude`) VALUES
 (17, 'Hani', 'Jember', '081273819287', 'hani', 'hani', 'girl-wavy.png', '7.892588', '113.8802083'),
 (22, 'Allya', 'Jember', '082937182938', 'allya', 'allya', 'girl-curly.png', '0', '0'),
-(23, 'Dwiki', 'Jember', '082937182938', 'dwiki', 'dwiki', 'boy-blue.png', '0', '0'),
-(25, 'Ajeng', 'Bondowoso', '081273819282', 'ajeng', 'ajeng', 'girl-green.png', '0', '0'),
-(26, 'Oong', 'Bondowoso', '085331053300', 'oong', 'oong', 'user2.png', '0', '0');
+(23, 'Dwiki', 'Mojokerto', '082937182938', 'dwiki', 'dwiki', 'boy-blue.png', '0', '0'),
+(26, 'Oong', 'Bondowoso', '085331053300', 'oong', 'oong', 'boy-green.png', '0', '0'),
+(28, 'Nanda', 'user', '081423716212', 'nanda', 'user', 'girl-green.png', '', ''),
+(29, 'Jay', 'Seattle', '081625172819', 'jay', 'jay', 'IMG_20200704_092320.jpg', '', '');
 
 --
 -- Indexes for dumped tables
@@ -260,31 +230,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admindetail`
 --
 ALTER TABLE `admindetail`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables

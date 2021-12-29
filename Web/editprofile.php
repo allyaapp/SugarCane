@@ -20,7 +20,14 @@ if(isset($_POST['update'])){
 
         $query = "UPDATE admindetail SET fullname='$fullname', no_hp ='$no_hp', alamat = '$alamat', username = '$username', password = '$password' WHERE admindetail.id_admin = '$id'";
         $result = mysqli_query($koneksi, $query);
-        header('Location: editprofile.php');
+
+        if (!$result) {
+            echo "<script> alert('The record couldn't be saved!') </script>";
+            echo "<script> location='editprofile.php'; </script>";
+        } else {
+            echo "<script> alert('Succesfully saved!') </script>";
+            echo "<script> location='editprofile.php'; </script>";
+        }
 }
 
     $query = "SELECT * FROM admindetail WHERE id_admin='$sesID'";

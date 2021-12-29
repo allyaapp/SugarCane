@@ -169,7 +169,7 @@ $path = '../images/admin/';
 
         <!-- Content -->
             <section class="content">
-                <div class="container-fluid">
+                <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
@@ -232,7 +232,7 @@ $path = '../images/admin/';
                                                 <a href="ukuranedit.php?id=<?php echo $row['id_detailukuran']; ?>">
                                                     <input type="button" class="btn btn-info" value="Edit" name="edit" <?php echo $dis; ?>>
                                                 </a>
-                                                <a href="ukurandelete.php?id=<?php echo $row['id_detailukuran'];?>" onclick="return confirm('Do you want to delete these records? This action cannot be undone. You will be unable to recover any data.');">
+                                                <a href="ukurandelete.php?id=<?php echo $row['id_detailukuran'];?>"    onclick="return confirm('Do you want to delete these records? This action cannot be undone. You will be unable to recover any data.');" >
                                                     <input type="button" class="btn btn-danger" value="Delete" name="delete" <?php echo $dis; ?>>
                                                 </a>
                                             </td>
