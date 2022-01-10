@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2021 at 08:26 AM
+-- Generation Time: Jan 10, 2022 at 02:54 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -129,7 +129,6 @@ INSERT INTO `pesanan` (`id_pesanan`, `id_transaksi`, `id_barang`, `qty`, `subhar
 
 CREATE TABLE `transaksi` (
   `id_transaksi` int(11) NOT NULL,
-  `id_admin` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tgltransaksi` date NOT NULL,
   `ongkir` double(11,2) NOT NULL,
@@ -141,10 +140,10 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `id_admin`, `id_user`, `tgltransaksi`, `ongkir`, `totalharga`, `status`) VALUES
-(1, 3, 22, '2021-12-29', 9000.00, 18000, 'Diterima'),
-(2, 3, 23, '2021-12-29', 6000.00, 14000, 'Diterima'),
-(3, 4, 17, '2021-12-29', 12000.00, 38000, 'Proses');
+INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `tgltransaksi`, `ongkir`, `totalharga`, `status`) VALUES
+(1, 22, '2021-12-29', 9000.00, 18000, 'Diterima'),
+(2, 23, '2021-12-29', 6000.00, 14000, 'Diterima'),
+(3, 17, '2021-12-29', 12000.00, 38000, 'Proses');
 
 -- --------------------------------------------------------
 
@@ -154,7 +153,7 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_admin`, `id_user`, `tgltransaksi`, 
 
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
-  `nama` varchar(40) NOT NULL,
+  `fullname` varchar(40) NOT NULL,
   `alamat` text DEFAULT NULL,
   `no_hp` varchar(13) NOT NULL,
   `username` varchar(10) NOT NULL,
@@ -168,13 +167,14 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama`, `alamat`, `no_hp`, `username`, `password`, `foto`, `longitude`, `latitude`) VALUES
+INSERT INTO `user` (`id_user`, `fullname`, `alamat`, `no_hp`, `username`, `password`, `foto`, `longitude`, `latitude`) VALUES
 (17, 'Hani', 'Jember', '081273819287', 'hani', 'hani', 'girl-wavy.png', '7.892588', '113.8802083'),
 (22, 'Allya', 'Jember', '082937182938', 'allya', 'allya', 'girl-curly.png', '0', '0'),
 (23, 'Dwiki', 'Mojokerto', '082937182938', 'dwiki', 'dwiki', 'boy-blue.png', '0', '0'),
 (26, 'Oong', 'Bondowoso', '085331053300', 'oong', 'oong', 'boy-green.png', '0', '0'),
-(28, 'Nanda', 'user', '081423716212', 'nanda', 'user', 'girl-green.png', '', ''),
-(29, 'Jay', 'Seattle', '081625172819', 'jay', 'jay', 'IMG_20200704_092320.jpg', '', '');
+(28, 'Nanda Arsya', 'user', '081423716212', 'nanda', 'user', 'girl-green.png', '', ''),
+(29, 'Jay', 'Seoul', '081625172819', 'jay', 'jay', 'IMG_20200704_092320.jpg', '', ''),
+(30, 'Dzikri Abyudzaky', 'Jember', '0864534567788', 'dzikri', 'dzikri', 'ERD.drawio (1).png', '', '');
 
 --
 -- Indexes for dumped tables
@@ -213,8 +213,7 @@ ALTER TABLE `pesanan`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_admin` (`id_admin`);
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `user`
@@ -254,7 +253,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
@@ -277,8 +276,7 @@ ALTER TABLE `pesanan`
 -- Constraints for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_admin`) REFERENCES `admindetail` (`id_admin`);
+  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
