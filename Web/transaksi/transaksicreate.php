@@ -14,7 +14,6 @@ $path = '../images/admin/';
 if(isset ($_POST['create']) ){
     //mengambil nilai dari form.
     $id_transaksi = $_POST['id_transaksi'];
-    $id_admin = $_POST['id_admin'];
     $id_user = $_POST['id_user'];
     $tgltransaksi = $_POST['tgltransaksi'];
     $ongkir = $_POST['ongkir'];
@@ -22,7 +21,7 @@ if(isset ($_POST['create']) ){
     $status = $_POST['status'];
 
     //query create 
-    $query = "INSERT INTO transaksi VALUES ('', '$id_admin', '$id_user', '$tgltransaksi', '$ongkir', '$totalharga', '$status')";
+    $query = "INSERT INTO transaksi VALUES ('', '$id_user', '$tgltransaksi', '$ongkir', '$totalharga', '$status')";
     $result = mysqli_query($koneksi, $query);
     
     //percabangan jika !$result, maka muncul alert tidak dapat disimpan.
@@ -210,12 +209,6 @@ if(isset ($_POST['create']) ){
                         </div>
                         <div class="body">
                             <form id="form_validation" action="transaksicreate.php" method="POST">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="number" class="form-control" name="id_admin" required>
-                                        <label class="form-label">ID Admin</label>
-                                    </div>
-                                </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" class="form-control" name="id_user" required>
