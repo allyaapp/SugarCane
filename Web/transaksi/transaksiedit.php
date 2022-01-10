@@ -13,8 +13,7 @@ $path = '../images/admin/';
 
     if(isset($_POST['update']) ){
         //mengambil nilai dari form
-        $id_transaksi = $_POST['id_transaksi'];       
-        $id_admin = $_POST['id_admin'];
+        $id_transaksi = $_POST['id_transaksi'];
         $id_user = $_POST['id_user'];
         $tgltransaksi = $_POST['tgltransaksi'];
         $ongkir = $_POST['ongkir'];
@@ -22,7 +21,7 @@ $path = '../images/admin/';
         $status =$_POST['status'];
 
         //query edit data
-        $query = "UPDATE transaksi SET id_admin='$id_admin', id_user='$id_user', tgltransaksi='$tgltransaksi', ongkir='$ongkir', totalharga='$totalharga', status='$status' WHERE id_transaksi='$id_transaksi'";
+        $query = "UPDATE transaksi SET id_user='$id_user', tgltransaksi='$tgltransaksi', ongkir='$ongkir', totalharga='$totalharga', status='$status' WHERE id_transaksi='$id_transaksi'";
         $result = mysqli_query($koneksi, $query);
         
         //percabangan jika !$result, maka muncul alert tidak dapat disimpan.
@@ -43,7 +42,6 @@ $path = '../images/admin/';
     //menampilkan data pada database menggunakan array
     while ($row = mysqli_fetch_array($result)){
         $id_transaksi = $row['id_transaksi'];
-        $id_admin = $row['id_admin'];
         $id_user = $row['id_user'];
         $tgltransaksi = $row['tgltransaksi'];
         $ongkir = $row['ongkir'];
@@ -225,12 +223,6 @@ $path = '../images/admin/';
                                     <div class="form-line">
                                         <input type="number" class="form-control" name="id_transaksi" value="<?php echo $id_transaksi;?>" required>
                                         <label class="form-label">ID Transaksi</label>
-                                    </div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="number" class="form-control" name="id_admin" value="<?php echo $id_admin;?>" required>
-                                        <label class="form-label">ID Admin</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
