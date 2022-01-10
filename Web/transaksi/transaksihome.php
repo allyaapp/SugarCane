@@ -194,7 +194,6 @@ $path = '../images/admin/';
                                         <tr>
                                             <th>No.</th>
                                             <th>ID Transaksi</th>
-                                            <th>Nama Admin</th>
                                             <th>ID User</th>
                                             <th>Nama User</th>
                                             <th>Tanggal Transaksi</th>
@@ -216,9 +215,8 @@ $path = '../images/admin/';
                                         $jumlah_data = mysqli_num_rows($data);
                                         $total_halaman = ceil($jumlah_data / $batas);
                                         
-                                        $query = "SELECT transaksi.id_transaksi, transaksi.id_admin, admindetail.id_admin, admindetail.fullname, transaksi.id_user, user.id_user, user.nama, transaksi.tgltransaksi, transaksi.ongkir, transaksi.totalharga, transaksi.status FROM transaksi 
+                                        $query = "SELECT transaksi.id_transaksi, transaksi.id_user, user.id_user, user.fullname, transaksi.tgltransaksi, transaksi.ongkir, transaksi.totalharga, transaksi.status FROM transaksi 
                                             INNER JOIN user ON transaksi.id_user = user.id_user 
-                                            INNER JOIN admindetail ON transaksi.id_admin = admindetail.id_admin 
                                             limit $halaman_awal, $batas";
                                         $result = mysqli_query($koneksi, $query);
                                         $no = $halaman_awal+1;
@@ -236,9 +234,8 @@ $path = '../images/admin/';
                                         <tr>
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row['id_transaksi']; ?></td>
-                                            <td><?php echo $row['fullname']; ?></td>
                                             <td><?php echo $row['id_user']; ?></td>
-                                            <td><?php echo $row['nama']; ?></td>
+                                            <td><?php echo $row['fullname']; ?></td>
                                             <td><?php echo $row['tgltransaksi']; ?></td>
                                             <td><?php echo $row['ongkir']; ?></td>
                                             <td><?php echo $row['totalharga']; ?></td>
